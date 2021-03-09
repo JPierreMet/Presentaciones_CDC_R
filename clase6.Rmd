@@ -5,7 +5,7 @@ author: "\nPierre Velásquez Rodriguez"
 date: "2021 - R Básico"
 output:
   xaringan::moon_reader:
-    lib_dir: libs
+    #lib_dir: libs
     css: [default,rladie.css, rladies-font.css, custom.css]
     nature:
       ratio: 16:9
