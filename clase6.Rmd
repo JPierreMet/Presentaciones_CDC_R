@@ -1,0 +1,1079 @@
+---
+title: "Manipulación de datos con `dplyr`"
+subtitle: "Parte III: resumir datos<br/><br/>"
+author: "\nPierre Velásquez Rodriguez"
+date: "2021 - R Básico"
+output:
+  xaringan::moon_reader:
+    lib_dir: libs
+    css: [default,rladie.css, rladies-font.css, custom.css]
+    nature:
+      ratio: 16:9
+      highlightStyle: github
+      highlightLines: true
+      countIncrementalSlides: false
+      slideNumberFormat: |
+        <div class="progress-bar-container">
+          <div class="progress-bar" style="width: calc(%current% / %total% * 100%);">
+          </div>
+        </div>
+---
+
+class: inverse, center, middle
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(fig.dim=c(5.5, 4.5), 
+                      # fig.retina=2, 
+                      out.width="100%",
+                      dev="svg")
+library(dplyr)
+library(ggplot2)
+library(kableExtra)
+library(tidyverse,warn.conflicts = F,verbose = F,quietly = T)
+library(aweek)
+```
+
+
+```{css echo=FALSE}
+.pull-left {
+  float: left;
+  width: 35%;
+}
+.pull-right {
+  float: right;
+  width: 42%;
+}
+.pull-right ~ p {
+  clear: both;
+}
+```
+
+
+```{r,echo=FALSE}
+df_meta <- readRDS('data/base_metexenicas_noti.rds')
+
+df_meta_3 <- df_meta %>% 
+  select(tipo_dx, departamento, sexo) %>% 
+  slice(1:13)
+
+df_meta_4 <- df_meta %>% 
+  select(tipo_dx, departamento:distrito, sexo, edad) %>% 
+  slice(1:13)
+
+```
+
+# Objetivos:
+<br/><br/>
+## 1. Aprender a resumir base de datos
+### 2. Comprender el uso de las funciones count(), arrange(), cumsum() y print()
+
+---
+class: inverse, center, middle
+
+# Objetivos:
+<br/><br/>
+### 1. Aprender a resumir base de datos
+## 2. Comprender el uso de las funciones count(), arrange(), cumsum() y print()
+
+---
+class: center, middle
+
+```{r, echo=FALSE, fig.cap="", out.width = '70%'}
+knitr::include_graphics("https://i.pinimg.com/originals/ec/c7/b5/ecc7b5907863388547fad7181eb80d3c.gif")
+```
+---
+class: inverse, center, middle
+
+# Veamos las funciones ...
+
+<!-- ################## Seccion count ################## -->
+---
+layout: true
+class: left, top
+
+## Función `count()`
+
+---
+
+.left-column[
+
+## ¿Qué hace?
+
+]
+
+.right-column[
+
+## Esta función nos permite contar el número de observaciones que hay en cada grupo
+
+]
+
+---
+
+.left-column[
+
+### ¿Qué hace?
+
+## Sintaxis
+
+]
+
+.right-column[
+
+##**DataFrame %>%**
+##**&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;count(variable 1, ..., variable n, sort = TRUE)**
+
+]
+
+---
+
+.left-column[
+### ¿Qué hace?
+
+### Sintaxis
+
+## Ejemplo 1
+]
+
+.right-column[
+
+```{r, eval=F}
+df_meta_3
+```
+
+]
+
+  
+.pull-left[
+### df_meta_3
+
+```{r,echo=FALSE, out.width='30%'}
+df_meta_3 %>% 
+  kable("html", row.names=FALSE) %>% 
+  kable_styling(font_size = 14)  %>%  
+  scroll_box(height = "300px", width = "400px")
+```
+]
+
+.pull-right[
+
+]
+
+
+---
+
+.left-column[
+### ¿Qué hace?
+
+### Sintaxis
+
+## Ejemplo 1
+]
+
+.right-column[
+
+```{r, eval=F}
+df_meta_3 %>% 
+  count(departamento)
+```
+
+]
+
+.pull-left[
+### df_meta_3
+
+```{r,echo=FALSE, out.width='30%'}
+df_meta_3 %>% 
+  kable("html", row.names=FALSE) %>% 
+  kable_styling(font_size = 14)  %>%  
+  scroll_box(height = "300px", width = "400px")
+```
+]
+
+.pull-right[
+
+### `Resultado:` 
+
+]
+
+---
+
+.left-column[
+### ¿Qué hace?
+
+### Sintaxis
+## Ejemplo 1
+]
+
+.right-column[
+
+```{r, eval=F}
+df_meta_3 %>% 
+  count(departamento)
+```
+
+]
+
+.pull-left[
+### df_meta_3
+
+```{r,echo=FALSE, out.width='30%'}
+df_meta_3 %>% 
+  kable("html", row.names=FALSE) %>% 
+  kable_styling(font_size = 14)  %>%  
+  scroll_box(height = "300px", width = "400px")
+```
+]
+
+.pull-right[
+
+### `Resultado:` 
+
+```{r,echo=FALSE, out.width='30%'}
+df_meta_3 %>% 
+  count(departamento) %>% 
+  kable("html", row.names=FALSE) %>% 
+  kable_styling(font_size = 14)  %>%  
+  scroll_box(height = "300px", width = "400px")
+```
+
+]
+
+---
+
+.left-column[
+### ¿Qué hace?
+
+### Sintaxis
+
+### Ejemplo 1
+
+## Ejemplo 2
+
+]
+
+.right-column[
+
+```{r, eval=F}
+df_meta_3 %>% 
+  count(departamento, tipo_dx)
+```
+
+]
+
+.pull-left[
+### df_meta_3
+
+```{r,echo=FALSE, out.width='30%'}
+df_meta_3 %>% 
+  kable("html", row.names=FALSE) %>% 
+  kable_styling(font_size = 14)  %>%  
+  scroll_box(height = "300px", width = "400px")
+```
+]
+
+.pull-right[
+
+
+]
+
+---
+
+.left-column[
+### ¿Qué hace?
+
+### Sintaxis
+
+### Ejemplo 1
+
+## Ejemplo 2
+
+]
+
+.right-column[
+
+```{r, eval=F}
+df_meta_3 %>% 
+  count(departamento, tipo_dx)
+```
+
+]
+
+.pull-left[
+### df_meta_3
+
+```{r,echo=FALSE, out.width='30%'}
+df_meta_3 %>% 
+  kable("html", row.names=FALSE) %>% 
+  kable_styling(font_size = 14)  %>%  
+  scroll_box(height = "300px", width = "400px")
+```
+]
+
+.pull-right[
+
+### `Resultado:`
+
+
+```{r,echo=FALSE, out.width='30%'}
+df_meta_3 %>% 
+  count(departamento, tipo_dx) %>% 
+  kable("html", row.names=FALSE) %>% 
+  kable_styling(font_size = 14)  %>%  
+  scroll_box(height = "300px", width = "400px")
+```
+
+]
+
+---
+layout: false
+
+class: inverse, center, middle
+
+# Continuemos ...
+
+<!-- ################## Seccion arrange ################## -->
+---
+layout: true
+class: left, top
+
+## Función `arrange()`
+
+---
+
+.left-column[
+
+## ¿Qué hace?
+
+]
+
+.right-column[
+
+## Esta función nos permite ordenar las variables de mayor a menor o viceversa.
+
+]
+
+---
+
+.left-column[
+
+### ¿Qué hace?
+
+## Sintaxis
+
+]
+
+.right-column[
+
+##**DataFrame %>%**
+##**&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;arrange(variable 1, ..., variable n)**
+
+]
+
+---
+
+.left-column[
+### ¿Qué hace?
+
+### Sintaxis
+
+## Ejemplo 1
+]
+
+.right-column[
+
+```{r, eval=F}
+df_meta_4
+```
+
+]
+
+.pull-left[
+### df_meta_4
+
+```{r,echo=FALSE, out.width='30%'}
+df_meta_4 %>% 
+  kable("html", row.names=FALSE) %>% 
+  kable_styling(font_size = 14)  %>%  
+  scroll_box(height = "300px", width = "400px")
+```
+]
+
+.pull-right[
+
+]
+
+---
+
+.left-column[
+### ¿Qué hace?
+
+### Sintaxis
+
+## Ejemplo 1
+]
+
+.right-column[
+
+```{r, eval=F}
+df_meta_4 %>% 
+  arrange(departamento, provincia, distrito)
+```
+
+]
+
+.pull-left[
+### df_meta_4
+
+```{r,echo=FALSE, out.width='30%'}
+df_meta_4 %>% 
+  kable("html", row.names=FALSE) %>% 
+  kable_styling(font_size = 14)  %>%  
+  scroll_box(height = "300px", width = "400px")
+```
+]
+
+.pull-right[
+
+### `Resultado:` 
+
+
+]
+
+---
+
+.left-column[
+### ¿Qué hace?
+
+### Sintaxis
+## Ejemplo 1
+]
+
+.right-column[
+
+```{r, eval=F}
+df_meta_4 %>% 
+  arrange(departamento, provincia, distrito)
+```
+
+]
+
+.pull-left[
+### df_meta_4
+
+```{r,echo=FALSE, out.width='30%'}
+df_meta_4 %>% 
+  kable("html", row.names=FALSE) %>% 
+  kable_styling(font_size = 14)  %>%  
+  scroll_box(height = "300px", width = "400px")
+```
+]
+
+.pull-right[
+
+### `Resultado:` 
+
+```{r,echo=FALSE, out.width='30%'}
+df_meta_4 %>% 
+  arrange(departamento, provincia, distrito) %>% 
+  kable("html", row.names=FALSE) %>% 
+  kable_styling(font_size = 14)  %>%  
+  scroll_box(height = "300px", width = "400px")
+```
+
+]
+
+---
+
+.left-column[
+### ¿Qué hace?
+
+### Sintaxis
+
+### Ejemplo 1
+
+## Ejemplo 2
+
+]
+
+.right-column[
+
+```{r, eval=F}
+df_meta_4 %>% 
+  arrange(desc(edad)) 
+```
+
+]
+
+.pull-left[
+### df_meta_4
+
+```{r,echo=FALSE, out.width='30%'}
+df_meta_4 %>% 
+  kable("html", row.names=FALSE) %>% 
+  kable_styling(font_size = 14)  %>%  
+  scroll_box(height = "300px", width = "400px")
+```
+]
+
+.pull-right[
+
+
+]
+
+---
+
+.left-column[
+### ¿Qué hace?
+
+### Sintaxis
+
+### Ejemplo 1
+
+## Ejemplo 2
+
+]
+
+.right-column[
+
+```{r, eval=F}
+df_meta_4 %>% 
+  arrange(desc(edad))
+```
+
+]
+
+.pull-left[
+### df_meta_4
+
+```{r,echo=FALSE, out.width='30%'}
+df_meta_4 %>% 
+  kable("html", row.names=FALSE) %>% 
+  kable_styling(font_size = 14)  %>%  
+  scroll_box(height = "300px", width = "400px")
+```
+]
+
+.pull-right[
+
+### `Resultado:`
+
+
+```{r,echo=FALSE, out.width='30%'}
+df_meta_4 %>% 
+  arrange(desc(edad))  %>% 
+  kable("html", row.names=FALSE) %>% 
+  kable_styling(font_size = 14)  %>%  
+  scroll_box(height = "300px", width = "400px")
+```
+
+]
+
+---
+layout: false
+
+class: inverse, center, middle
+
+# Falta poco ...
+
+<!-- ################## Seccion cumsum ################## -->
+---
+layout: true
+class: left, top
+
+## Función `cumsum()`
+
+---
+
+.left-column[
+
+## ¿Qué hace?
+
+]
+
+.right-column[
+
+## Esta función nos permite calcular la suma de una variable de forma acumulada a lo largo de las filas.
+
+### `Nota: esta función va dentro de la función mutate, ya que creará una nueva variable`
+
+]
+
+---
+
+.left-column[
+
+### ¿Qué hace?
+
+## Sintaxis
+
+]
+
+.right-column[
+
+##**DataFrame %>%**
+##**&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;mutate(cumsum(variable))**
+
+]
+
+---
+
+.left-column[
+### ¿Qué hace?
+
+### Sintaxis
+
+## Ejemplo 1
+]
+
+.right-column[
+
+```{r, eval=F}
+df_meta_4
+```
+
+]
+
+.pull-left[
+### df_meta_4
+
+```{r,echo=FALSE, out.width='30%'}
+df_meta_4 %>% 
+  kable("html", row.names=FALSE) %>% 
+  kable_styling(font_size = 14)  %>%  
+  scroll_box(height = "300px", width = "400px")
+```
+]
+
+.pull-right[
+
+]
+
+---
+
+.left-column[
+### ¿Qué hace?
+
+### Sintaxis
+
+## Ejemplo 1
+]
+
+.right-column[
+
+```{r, eval=F}
+df_meta_4 %>% 
+  count(departamento) %>% 
+  mutate(cumsum(n))
+```
+
+]
+
+.pull-left[
+### df_meta_4
+
+```{r,echo=FALSE, out.width='30%'}
+df_meta_4 %>% 
+  kable("html", row.names=FALSE) %>% 
+  kable_styling(font_size = 14)  %>%  
+  scroll_box(height = "300px", width = "400px")
+```
+]
+
+.pull-right[
+
+### `Resultado:` 
+
+
+]
+
+---
+
+.left-column[
+### ¿Qué hace?
+
+### Sintaxis
+## Ejemplo 1
+]
+
+.right-column[
+
+```{r, eval=F}
+df_meta_4 %>% 
+  count(departamento) %>% 
+  mutate(cumsum(n))
+```
+
+]
+
+.pull-left[
+### df_meta_4
+
+```{r,echo=FALSE, out.width='30%'}
+df_meta_4 %>% 
+  kable("html", row.names=FALSE) %>% 
+  kable_styling(font_size = 14)  %>%  
+  scroll_box(height = "300px", width = "400px")
+```
+]
+
+.pull-right[
+
+### `Resultado:` 
+
+```{r,echo=FALSE, out.width='30%'}
+df_meta_4 %>% 
+  count(departamento) %>% 
+  mutate(cumsum(n)) %>% 
+  kable("html", row.names=FALSE) %>% 
+  kable_styling(font_size = 14)  %>%  
+  scroll_box(height = "300px", width = "400px")
+```
+
+]
+
+---
+
+.left-column[
+### ¿Qué hace?
+
+### Sintaxis
+
+### Ejemplo 1
+
+## Ejemplo 2
+
+]
+
+.right-column[
+
+```{r, eval=F}
+df_meta_4 %>% 
+  count(departamento) %>% 
+  mutate(suma = cumsum(n))
+```
+
+]
+
+.pull-left[
+### df_meta_4
+
+```{r,echo=FALSE, out.width='30%'}
+df_meta_4 %>% 
+  kable("html", row.names=FALSE) %>% 
+  kable_styling(font_size = 14)  %>%  
+  scroll_box(height = "300px", width = "400px")
+```
+]
+
+.pull-right[
+
+
+]
+
+---
+
+.left-column[
+### ¿Qué hace?
+
+### Sintaxis
+
+### Ejemplo 1
+
+## Ejemplo 2
+
+]
+
+.right-column[
+
+```{r, eval=F}
+df_meta_4 %>% 
+  count(departamento) %>% 
+  mutate(suma = cumsum(n))
+```
+
+]
+
+.pull-left[
+### df_meta_4
+
+```{r,echo=FALSE, out.width='30%'}
+df_meta_4 %>% 
+  kable("html", row.names=FALSE) %>% 
+  kable_styling(font_size = 14)  %>%  
+  scroll_box(height = "300px", width = "400px")
+```
+]
+
+.pull-right[
+
+### `Resultado:`
+
+
+```{r,echo=FALSE, out.width='30%'}
+df_meta_4 %>% 
+  count(departamento) %>% 
+  mutate(suma = cumsum(n))  %>% 
+  kable("html", row.names=FALSE) %>% 
+  kable_styling(font_size = 14)  %>%  
+  scroll_box(height = "300px", width = "400px")
+```
+
+]
+
+---
+
+layout: false
+
+class: inverse, center, middle
+
+# Finalmente ...
+
+<!-- ################## Seccion print ################## -->
+---
+layout: true
+class: left, top
+
+## Función `print()`
+
+---
+
+.left-column[
+
+## ¿Qué hace?
+
+]
+
+.right-column[
+
+## Esta función nos muestra el resultado en la consola (aún si previamente definimos que el resultado se guarde en un objeto)
+
+
+]
+
+---
+
+.left-column[
+
+### ¿Qué hace?
+
+## Sintaxis
+
+]
+
+.right-column[
+
+##**DataFrame %>%**
+##**&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;print()**
+
+]
+
+---
+
+.left-column[
+### ¿Qué hace?
+
+### Sintaxis
+
+## Ejemplo 1
+]
+
+.right-column[
+
+```{r, eval=F}
+df_meta_4
+```
+
+]
+
+.pull-left[
+### df_meta_4
+
+```{r,echo=FALSE, out.width='30%'}
+df_meta_4 %>%
+  kable("html", row.names=FALSE) %>% 
+  kable_styling(font_size = 14)  %>%  
+  scroll_box(height = "300px", width = "400px")
+```
+]
+
+.pull-right[
+
+]
+
+---
+
+.left-column[
+### ¿Qué hace?
+
+### Sintaxis
+
+## Ejemplo 1
+]
+
+.right-column[
+
+```{r, eval=F}
+df_meta_4 %>% 
+ print()
+```
+
+]
+
+.pull-left[
+### df_meta_4
+
+```{r,echo=FALSE, out.width='30%'}
+df_meta_4 %>% 
+  kable("html", row.names=FALSE) %>% 
+  kable_styling(font_size = 14)  %>%  
+  scroll_box(height = "300px", width = "400px")
+```
+]
+
+.pull-right[
+
+### `Resultado:` 
+
+
+]
+
+---
+
+.left-column[
+### ¿Qué hace?
+
+### Sintaxis
+## Ejemplo 1
+]
+
+.right-column[
+
+```{r, eval=F}
+df_meta_4 %>% 
+ print()
+```
+
+]
+
+.pull-left[
+### df_meta_4
+
+```{r,echo=FALSE, out.width='30%'}
+df_meta_4 %>% 
+  kable("html", row.names=FALSE) %>% 
+  kable_styling(font_size = 14)  %>%  
+  scroll_box(height = "300px", width = "400px")
+```
+]
+
+.pull-right[
+
+### `Resultado:` 
+
+```{r,echo=FALSE, out.width='30%'}
+df_meta_4 %>% 
+  print()
+```
+
+]
+
+---
+
+.left-column[
+### ¿Qué hace?
+
+### Sintaxis
+
+### Ejemplo 1
+
+## Ejemplo 2
+
+]
+
+.right-column[
+
+```{r, eval=F}
+df_meta_4 %>% 
+  count(departamento) %>% 
+  mutate(suma = cumsum(n))
+```
+
+]
+
+.pull-left[
+### df_meta_4
+
+```{r,echo=FALSE, out.width='30%'}
+df_meta_4 %>% 
+  kable("html", row.names=FALSE) %>% 
+  kable_styling(font_size = 14)  %>%  
+  scroll_box(height = "300px", width = "400px")
+```
+]
+
+.pull-right[
+
+
+]
+
+---
+
+.left-column[
+### ¿Qué hace?
+
+### Sintaxis
+
+### Ejemplo 1
+
+## Ejemplo 2
+
+]
+
+.right-column[
+
+```{r, eval=F}
+df_meta_4 %>% 
+  count(departamento) %>% 
+  mutate(suma = cumsum(n))
+```
+
+]
+
+.pull-left[
+### df_meta_4
+
+```{r,echo=FALSE, out.width='30%'}
+df_meta_4 %>% 
+  kable("html", row.names=FALSE) %>% 
+  kable_styling(font_size = 14)  %>%  
+  scroll_box(height = "300px", width = "400px")
+```
+]
+
+.pull-right[
+
+### `Resultado:`
+
+
+```{r,echo=FALSE, out.width='30%'}
+df_meta_4 %>% 
+  count(departamento) %>% 
+  print()
+```
+
+]
+
+---
+
+layout: false
+
+class: highlight, middle, center
+
+# ¡ Gracias por su total atención !
+## Pasemos a los grupos de prácticas
+
+```{r, echo=FALSE, fig.cap="", out.width = '60%'}
+knitr::include_graphics("https://i.giphy.com/tztv4OdtoKfgQ.gif")
+```
+
+

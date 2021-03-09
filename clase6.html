@@ -1,0 +1,3631 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+  <head>
+    <title>Manipulación de datos con dplyr</title>
+    <meta charset="utf-8" />
+    <meta name="author" content="Pierre Velásquez Rodriguez" />
+    <script src="libs/header-attrs-2.6/header-attrs.js"></script>
+    <link href="libs/remark-css-0.0.1/default.css" rel="stylesheet" />
+    <script src="libs/kePrint-0.0.1/kePrint.js"></script>
+    <link href="libs/lightable-0.0.1/lightable.css" rel="stylesheet" />
+    <link rel="stylesheet" href="rladie.css" type="text/css" />
+    <link rel="stylesheet" href="rladies-font.css" type="text/css" />
+    <link rel="stylesheet" href="custom.css" type="text/css" />
+  </head>
+  <body>
+    <textarea id="source">
+class: center, middle, inverse, title-slide
+
+# Manipulación de datos con <code>dplyr</code>
+## Parte III: resumir datos<br/><br/>
+### Pierre Velásquez Rodriguez
+### 2021 - R Básico
+
+---
+
+
+class: inverse, center, middle
+
+
+
+
+&lt;style type="text/css"&gt;
+.pull-left {
+  float: left;
+  width: 35%;
+}
+.pull-right {
+  float: right;
+  width: 42%;
+}
+.pull-right ~ p {
+  clear: both;
+}
+&lt;/style&gt;
+
+
+
+
+# Objetivos:
+&lt;br/&gt;&lt;br/&gt;
+## 1. Aprender a resumir base de datos
+### 2. Comprender el uso de las funciones count(), arrange(), cumsum() y print()
+
+---
+class: inverse, center, middle
+
+# Objetivos:
+&lt;br/&gt;&lt;br/&gt;
+### 1. Aprender a resumir base de datos
+## 2. Comprender el uso de las funciones count(), arrange(), cumsum() y print()
+
+---
+class: center, middle
+
+&lt;img src="https://i.pinimg.com/originals/ec/c7/b5/ecc7b5907863388547fad7181eb80d3c.gif" width="70%" /&gt;
+---
+class: inverse, center, middle
+
+# Veamos las funciones ...
+
+&lt;!-- ################## Seccion count ################## --&gt;
+---
+layout: true
+class: left, top
+
+## Función `count()`
+
+---
+
+.left-column[
+
+## ¿Qué hace?
+
+]
+
+.right-column[
+
+## Esta función nos permite contar el número de observaciones que hay en cada grupo
+
+]
+
+---
+
+.left-column[
+
+### ¿Qué hace?
+
+## Sintaxis
+
+]
+
+.right-column[
+
+##**DataFrame %&gt;%**
+##**&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;count(variable 1, ..., variable n, sort = TRUE)**
+
+]
+
+---
+
+.left-column[
+### ¿Qué hace?
+
+### Sintaxis
+
+## Ejemplo 1
+]
+
+.right-column[
+
+
+```r
+df_meta_3
+```
+
+]
+
+  
+.pull-left[
+### df_meta_3
+
+&lt;div style="border: 1px solid #ddd; padding: 0px; overflow-y: scroll; height:300px; overflow-x: scroll; width:400px; "&gt;&lt;table class="table" style="font-size: 14px; margin-left: auto; margin-right: auto;"&gt;
+ &lt;thead&gt;
+  &lt;tr&gt;
+   &lt;th style="text-align:left;position: sticky; top:0; background-color: #FFFFFF;"&gt; tipo_dx &lt;/th&gt;
+   &lt;th style="text-align:left;position: sticky; top:0; background-color: #FFFFFF;"&gt; departamento &lt;/th&gt;
+   &lt;th style="text-align:left;position: sticky; top:0; background-color: #FFFFFF;"&gt; sexo &lt;/th&gt;
+  &lt;/tr&gt;
+ &lt;/thead&gt;
+&lt;tbody&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; D &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; MADRE DE DIOS &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; F &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; P &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; MADRE DE DIOS &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; F &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; D &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; MADRE DE DIOS &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; M &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; D &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; MADRE DE DIOS &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; F &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; C &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; HUANUCO &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; F &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; C &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; JUNIN &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; M &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; C &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; JUNIN &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; M &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; C &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; MADRE DE DIOS &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; M &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; D &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; AMAZONAS &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; F &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; D &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; AMAZONAS &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; F &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; P &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; PIURA &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; M &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; D &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; ICA &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; M &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; C &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; LAMBAYEQUE &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; F &lt;/td&gt;
+  &lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;&lt;/div&gt;
+]
+
+.pull-right[
+
+]
+
+
+---
+
+.left-column[
+### ¿Qué hace?
+
+### Sintaxis
+
+## Ejemplo 1
+]
+
+.right-column[
+
+
+```r
+df_meta_3 %&gt;% 
+  count(departamento)
+```
+
+]
+
+.pull-left[
+### df_meta_3
+
+&lt;div style="border: 1px solid #ddd; padding: 0px; overflow-y: scroll; height:300px; overflow-x: scroll; width:400px; "&gt;&lt;table class="table" style="font-size: 14px; margin-left: auto; margin-right: auto;"&gt;
+ &lt;thead&gt;
+  &lt;tr&gt;
+   &lt;th style="text-align:left;position: sticky; top:0; background-color: #FFFFFF;"&gt; tipo_dx &lt;/th&gt;
+   &lt;th style="text-align:left;position: sticky; top:0; background-color: #FFFFFF;"&gt; departamento &lt;/th&gt;
+   &lt;th style="text-align:left;position: sticky; top:0; background-color: #FFFFFF;"&gt; sexo &lt;/th&gt;
+  &lt;/tr&gt;
+ &lt;/thead&gt;
+&lt;tbody&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; D &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; MADRE DE DIOS &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; F &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; P &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; MADRE DE DIOS &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; F &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; D &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; MADRE DE DIOS &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; M &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; D &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; MADRE DE DIOS &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; F &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; C &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; HUANUCO &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; F &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; C &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; JUNIN &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; M &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; C &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; JUNIN &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; M &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; C &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; MADRE DE DIOS &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; M &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; D &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; AMAZONAS &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; F &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; D &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; AMAZONAS &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; F &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; P &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; PIURA &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; M &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; D &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; ICA &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; M &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; C &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; LAMBAYEQUE &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; F &lt;/td&gt;
+  &lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;&lt;/div&gt;
+]
+
+.pull-right[
+
+### `Resultado:` 
+
+]
+
+---
+
+.left-column[
+### ¿Qué hace?
+
+### Sintaxis
+## Ejemplo 1
+]
+
+.right-column[
+
+
+```r
+df_meta_3 %&gt;% 
+  count(departamento)
+```
+
+]
+
+.pull-left[
+### df_meta_3
+
+&lt;div style="border: 1px solid #ddd; padding: 0px; overflow-y: scroll; height:300px; overflow-x: scroll; width:400px; "&gt;&lt;table class="table" style="font-size: 14px; margin-left: auto; margin-right: auto;"&gt;
+ &lt;thead&gt;
+  &lt;tr&gt;
+   &lt;th style="text-align:left;position: sticky; top:0; background-color: #FFFFFF;"&gt; tipo_dx &lt;/th&gt;
+   &lt;th style="text-align:left;position: sticky; top:0; background-color: #FFFFFF;"&gt; departamento &lt;/th&gt;
+   &lt;th style="text-align:left;position: sticky; top:0; background-color: #FFFFFF;"&gt; sexo &lt;/th&gt;
+  &lt;/tr&gt;
+ &lt;/thead&gt;
+&lt;tbody&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; D &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; MADRE DE DIOS &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; F &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; P &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; MADRE DE DIOS &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; F &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; D &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; MADRE DE DIOS &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; M &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; D &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; MADRE DE DIOS &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; F &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; C &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; HUANUCO &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; F &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; C &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; JUNIN &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; M &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; C &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; JUNIN &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; M &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; C &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; MADRE DE DIOS &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; M &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; D &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; AMAZONAS &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; F &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; D &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; AMAZONAS &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; F &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; P &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; PIURA &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; M &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; D &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; ICA &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; M &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; C &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; LAMBAYEQUE &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; F &lt;/td&gt;
+  &lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;&lt;/div&gt;
+]
+
+.pull-right[
+
+### `Resultado:` 
+
+&lt;div style="border: 1px solid #ddd; padding: 0px; overflow-y: scroll; height:300px; overflow-x: scroll; width:400px; "&gt;&lt;table class="table" style="font-size: 14px; margin-left: auto; margin-right: auto;"&gt;
+ &lt;thead&gt;
+  &lt;tr&gt;
+   &lt;th style="text-align:left;position: sticky; top:0; background-color: #FFFFFF;"&gt; departamento &lt;/th&gt;
+   &lt;th style="text-align:right;position: sticky; top:0; background-color: #FFFFFF;"&gt; n &lt;/th&gt;
+  &lt;/tr&gt;
+ &lt;/thead&gt;
+&lt;tbody&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; AMAZONAS &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 2 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; HUANUCO &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 1 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; ICA &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 1 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; JUNIN &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 2 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; LAMBAYEQUE &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 1 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; MADRE DE DIOS &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 5 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; PIURA &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 1 &lt;/td&gt;
+  &lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;&lt;/div&gt;
+
+]
+
+---
+
+.left-column[
+### ¿Qué hace?
+
+### Sintaxis
+
+### Ejemplo 1
+
+## Ejemplo 2
+
+]
+
+.right-column[
+
+
+```r
+df_meta_3 %&gt;% 
+  count(departamento, tipo_dx)
+```
+
+]
+
+.pull-left[
+### df_meta_3
+
+&lt;div style="border: 1px solid #ddd; padding: 0px; overflow-y: scroll; height:300px; overflow-x: scroll; width:400px; "&gt;&lt;table class="table" style="font-size: 14px; margin-left: auto; margin-right: auto;"&gt;
+ &lt;thead&gt;
+  &lt;tr&gt;
+   &lt;th style="text-align:left;position: sticky; top:0; background-color: #FFFFFF;"&gt; tipo_dx &lt;/th&gt;
+   &lt;th style="text-align:left;position: sticky; top:0; background-color: #FFFFFF;"&gt; departamento &lt;/th&gt;
+   &lt;th style="text-align:left;position: sticky; top:0; background-color: #FFFFFF;"&gt; sexo &lt;/th&gt;
+  &lt;/tr&gt;
+ &lt;/thead&gt;
+&lt;tbody&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; D &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; MADRE DE DIOS &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; F &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; P &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; MADRE DE DIOS &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; F &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; D &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; MADRE DE DIOS &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; M &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; D &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; MADRE DE DIOS &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; F &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; C &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; HUANUCO &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; F &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; C &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; JUNIN &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; M &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; C &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; JUNIN &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; M &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; C &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; MADRE DE DIOS &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; M &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; D &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; AMAZONAS &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; F &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; D &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; AMAZONAS &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; F &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; P &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; PIURA &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; M &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; D &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; ICA &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; M &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; C &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; LAMBAYEQUE &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; F &lt;/td&gt;
+  &lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;&lt;/div&gt;
+]
+
+.pull-right[
+
+
+]
+
+---
+
+.left-column[
+### ¿Qué hace?
+
+### Sintaxis
+
+### Ejemplo 1
+
+## Ejemplo 2
+
+]
+
+.right-column[
+
+
+```r
+df_meta_3 %&gt;% 
+  count(departamento, tipo_dx)
+```
+
+]
+
+.pull-left[
+### df_meta_3
+
+&lt;div style="border: 1px solid #ddd; padding: 0px; overflow-y: scroll; height:300px; overflow-x: scroll; width:400px; "&gt;&lt;table class="table" style="font-size: 14px; margin-left: auto; margin-right: auto;"&gt;
+ &lt;thead&gt;
+  &lt;tr&gt;
+   &lt;th style="text-align:left;position: sticky; top:0; background-color: #FFFFFF;"&gt; tipo_dx &lt;/th&gt;
+   &lt;th style="text-align:left;position: sticky; top:0; background-color: #FFFFFF;"&gt; departamento &lt;/th&gt;
+   &lt;th style="text-align:left;position: sticky; top:0; background-color: #FFFFFF;"&gt; sexo &lt;/th&gt;
+  &lt;/tr&gt;
+ &lt;/thead&gt;
+&lt;tbody&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; D &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; MADRE DE DIOS &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; F &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; P &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; MADRE DE DIOS &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; F &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; D &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; MADRE DE DIOS &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; M &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; D &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; MADRE DE DIOS &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; F &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; C &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; HUANUCO &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; F &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; C &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; JUNIN &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; M &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; C &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; JUNIN &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; M &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; C &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; MADRE DE DIOS &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; M &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; D &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; AMAZONAS &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; F &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; D &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; AMAZONAS &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; F &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; P &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; PIURA &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; M &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; D &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; ICA &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; M &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; C &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; LAMBAYEQUE &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; F &lt;/td&gt;
+  &lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;&lt;/div&gt;
+]
+
+.pull-right[
+
+### `Resultado:`
+
+
+&lt;div style="border: 1px solid #ddd; padding: 0px; overflow-y: scroll; height:300px; overflow-x: scroll; width:400px; "&gt;&lt;table class="table" style="font-size: 14px; margin-left: auto; margin-right: auto;"&gt;
+ &lt;thead&gt;
+  &lt;tr&gt;
+   &lt;th style="text-align:left;position: sticky; top:0; background-color: #FFFFFF;"&gt; departamento &lt;/th&gt;
+   &lt;th style="text-align:left;position: sticky; top:0; background-color: #FFFFFF;"&gt; tipo_dx &lt;/th&gt;
+   &lt;th style="text-align:right;position: sticky; top:0; background-color: #FFFFFF;"&gt; n &lt;/th&gt;
+  &lt;/tr&gt;
+ &lt;/thead&gt;
+&lt;tbody&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; AMAZONAS &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; D &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 2 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; HUANUCO &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; C &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 1 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; ICA &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; D &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 1 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; JUNIN &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; C &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 2 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; LAMBAYEQUE &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; C &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 1 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; MADRE DE DIOS &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; C &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 1 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; MADRE DE DIOS &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; D &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 3 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; MADRE DE DIOS &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; P &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 1 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; PIURA &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; P &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 1 &lt;/td&gt;
+  &lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;&lt;/div&gt;
+
+]
+
+---
+layout: false
+
+class: inverse, center, middle
+
+# Continuemos ...
+
+&lt;!-- ################## Seccion arrange ################## --&gt;
+---
+layout: true
+class: left, top
+
+## Función `arrange()`
+
+---
+
+.left-column[
+
+## ¿Qué hace?
+
+]
+
+.right-column[
+
+## Esta función nos permite ordenar las variables de mayor a menor o viceversa.
+
+]
+
+---
+
+.left-column[
+
+### ¿Qué hace?
+
+## Sintaxis
+
+]
+
+.right-column[
+
+##**DataFrame %&gt;%**
+##**&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;arrange(variable 1, ..., variable n)**
+
+]
+
+---
+
+.left-column[
+### ¿Qué hace?
+
+### Sintaxis
+
+## Ejemplo 1
+]
+
+.right-column[
+
+
+```r
+df_meta_4
+```
+
+]
+
+.pull-left[
+### df_meta_4
+
+&lt;div style="border: 1px solid #ddd; padding: 0px; overflow-y: scroll; height:300px; overflow-x: scroll; width:400px; "&gt;&lt;table class="table" style="font-size: 14px; margin-left: auto; margin-right: auto;"&gt;
+ &lt;thead&gt;
+  &lt;tr&gt;
+   &lt;th style="text-align:left;position: sticky; top:0; background-color: #FFFFFF;"&gt; tipo_dx &lt;/th&gt;
+   &lt;th style="text-align:left;position: sticky; top:0; background-color: #FFFFFF;"&gt; departamento &lt;/th&gt;
+   &lt;th style="text-align:left;position: sticky; top:0; background-color: #FFFFFF;"&gt; provincia &lt;/th&gt;
+   &lt;th style="text-align:left;position: sticky; top:0; background-color: #FFFFFF;"&gt; distrito &lt;/th&gt;
+   &lt;th style="text-align:left;position: sticky; top:0; background-color: #FFFFFF;"&gt; sexo &lt;/th&gt;
+   &lt;th style="text-align:right;position: sticky; top:0; background-color: #FFFFFF;"&gt; edad &lt;/th&gt;
+  &lt;/tr&gt;
+ &lt;/thead&gt;
+&lt;tbody&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; D &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; MADRE DE DIOS &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; TAMBOPATA &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; LABERINTO &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; F &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 20 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; P &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; MADRE DE DIOS &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; TAMBOPATA &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; LAS PIEDRAS &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; F &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 24 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; D &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; MADRE DE DIOS &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; TAMBOPATA &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; LAS PIEDRAS &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; M &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 21 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; D &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; MADRE DE DIOS &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; TAMBOPATA &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; LAS PIEDRAS &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; F &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 33 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; C &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; HUANUCO &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; LEONCIO PRADO &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; RUPA-RUPA &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; F &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 36 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; C &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; JUNIN &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; SATIPO &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; PANGOA &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; M &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 21 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; C &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; JUNIN &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; SATIPO &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; MAZAMARI &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; M &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 27 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; C &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; MADRE DE DIOS &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; TAMBOPATA &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; TAMBOPATA &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; M &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 28 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; D &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; AMAZONAS &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; UTCUBAMBA &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; EL MILAGRO &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; F &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 51 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; D &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; AMAZONAS &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; BAGUA &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; BAGUA &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; F &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 13 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; P &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; PIURA &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; PIURA &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; CASTILLA &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; M &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 33 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; D &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; ICA &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; PISCO &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; SAN ANDRES &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; M &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 26 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; C &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; LAMBAYEQUE &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; LAMBAYEQUE &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; MOTUPE &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; F &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 42 &lt;/td&gt;
+  &lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;&lt;/div&gt;
+]
+
+.pull-right[
+
+]
+
+---
+
+.left-column[
+### ¿Qué hace?
+
+### Sintaxis
+
+## Ejemplo 1
+]
+
+.right-column[
+
+
+```r
+df_meta_4 %&gt;% 
+  arrange(departamento, provincia, distrito)
+```
+
+]
+
+.pull-left[
+### df_meta_4
+
+&lt;div style="border: 1px solid #ddd; padding: 0px; overflow-y: scroll; height:300px; overflow-x: scroll; width:400px; "&gt;&lt;table class="table" style="font-size: 14px; margin-left: auto; margin-right: auto;"&gt;
+ &lt;thead&gt;
+  &lt;tr&gt;
+   &lt;th style="text-align:left;position: sticky; top:0; background-color: #FFFFFF;"&gt; tipo_dx &lt;/th&gt;
+   &lt;th style="text-align:left;position: sticky; top:0; background-color: #FFFFFF;"&gt; departamento &lt;/th&gt;
+   &lt;th style="text-align:left;position: sticky; top:0; background-color: #FFFFFF;"&gt; provincia &lt;/th&gt;
+   &lt;th style="text-align:left;position: sticky; top:0; background-color: #FFFFFF;"&gt; distrito &lt;/th&gt;
+   &lt;th style="text-align:left;position: sticky; top:0; background-color: #FFFFFF;"&gt; sexo &lt;/th&gt;
+   &lt;th style="text-align:right;position: sticky; top:0; background-color: #FFFFFF;"&gt; edad &lt;/th&gt;
+  &lt;/tr&gt;
+ &lt;/thead&gt;
+&lt;tbody&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; D &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; MADRE DE DIOS &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; TAMBOPATA &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; LABERINTO &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; F &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 20 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; P &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; MADRE DE DIOS &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; TAMBOPATA &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; LAS PIEDRAS &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; F &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 24 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; D &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; MADRE DE DIOS &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; TAMBOPATA &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; LAS PIEDRAS &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; M &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 21 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; D &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; MADRE DE DIOS &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; TAMBOPATA &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; LAS PIEDRAS &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; F &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 33 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; C &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; HUANUCO &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; LEONCIO PRADO &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; RUPA-RUPA &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; F &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 36 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; C &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; JUNIN &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; SATIPO &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; PANGOA &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; M &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 21 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; C &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; JUNIN &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; SATIPO &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; MAZAMARI &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; M &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 27 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; C &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; MADRE DE DIOS &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; TAMBOPATA &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; TAMBOPATA &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; M &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 28 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; D &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; AMAZONAS &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; UTCUBAMBA &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; EL MILAGRO &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; F &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 51 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; D &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; AMAZONAS &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; BAGUA &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; BAGUA &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; F &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 13 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; P &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; PIURA &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; PIURA &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; CASTILLA &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; M &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 33 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; D &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; ICA &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; PISCO &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; SAN ANDRES &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; M &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 26 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; C &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; LAMBAYEQUE &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; LAMBAYEQUE &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; MOTUPE &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; F &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 42 &lt;/td&gt;
+  &lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;&lt;/div&gt;
+]
+
+.pull-right[
+
+### `Resultado:` 
+
+
+]
+
+---
+
+.left-column[
+### ¿Qué hace?
+
+### Sintaxis
+## Ejemplo 1
+]
+
+.right-column[
+
+
+```r
+df_meta_4 %&gt;% 
+  arrange(departamento, provincia, distrito)
+```
+
+]
+
+.pull-left[
+### df_meta_4
+
+&lt;div style="border: 1px solid #ddd; padding: 0px; overflow-y: scroll; height:300px; overflow-x: scroll; width:400px; "&gt;&lt;table class="table" style="font-size: 14px; margin-left: auto; margin-right: auto;"&gt;
+ &lt;thead&gt;
+  &lt;tr&gt;
+   &lt;th style="text-align:left;position: sticky; top:0; background-color: #FFFFFF;"&gt; tipo_dx &lt;/th&gt;
+   &lt;th style="text-align:left;position: sticky; top:0; background-color: #FFFFFF;"&gt; departamento &lt;/th&gt;
+   &lt;th style="text-align:left;position: sticky; top:0; background-color: #FFFFFF;"&gt; provincia &lt;/th&gt;
+   &lt;th style="text-align:left;position: sticky; top:0; background-color: #FFFFFF;"&gt; distrito &lt;/th&gt;
+   &lt;th style="text-align:left;position: sticky; top:0; background-color: #FFFFFF;"&gt; sexo &lt;/th&gt;
+   &lt;th style="text-align:right;position: sticky; top:0; background-color: #FFFFFF;"&gt; edad &lt;/th&gt;
+  &lt;/tr&gt;
+ &lt;/thead&gt;
+&lt;tbody&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; D &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; MADRE DE DIOS &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; TAMBOPATA &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; LABERINTO &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; F &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 20 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; P &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; MADRE DE DIOS &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; TAMBOPATA &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; LAS PIEDRAS &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; F &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 24 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; D &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; MADRE DE DIOS &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; TAMBOPATA &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; LAS PIEDRAS &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; M &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 21 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; D &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; MADRE DE DIOS &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; TAMBOPATA &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; LAS PIEDRAS &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; F &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 33 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; C &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; HUANUCO &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; LEONCIO PRADO &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; RUPA-RUPA &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; F &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 36 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; C &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; JUNIN &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; SATIPO &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; PANGOA &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; M &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 21 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; C &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; JUNIN &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; SATIPO &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; MAZAMARI &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; M &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 27 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; C &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; MADRE DE DIOS &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; TAMBOPATA &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; TAMBOPATA &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; M &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 28 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; D &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; AMAZONAS &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; UTCUBAMBA &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; EL MILAGRO &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; F &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 51 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; D &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; AMAZONAS &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; BAGUA &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; BAGUA &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; F &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 13 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; P &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; PIURA &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; PIURA &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; CASTILLA &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; M &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 33 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; D &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; ICA &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; PISCO &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; SAN ANDRES &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; M &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 26 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; C &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; LAMBAYEQUE &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; LAMBAYEQUE &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; MOTUPE &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; F &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 42 &lt;/td&gt;
+  &lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;&lt;/div&gt;
+]
+
+.pull-right[
+
+### `Resultado:` 
+
+&lt;div style="border: 1px solid #ddd; padding: 0px; overflow-y: scroll; height:300px; overflow-x: scroll; width:400px; "&gt;&lt;table class="table" style="font-size: 14px; margin-left: auto; margin-right: auto;"&gt;
+ &lt;thead&gt;
+  &lt;tr&gt;
+   &lt;th style="text-align:left;position: sticky; top:0; background-color: #FFFFFF;"&gt; tipo_dx &lt;/th&gt;
+   &lt;th style="text-align:left;position: sticky; top:0; background-color: #FFFFFF;"&gt; departamento &lt;/th&gt;
+   &lt;th style="text-align:left;position: sticky; top:0; background-color: #FFFFFF;"&gt; provincia &lt;/th&gt;
+   &lt;th style="text-align:left;position: sticky; top:0; background-color: #FFFFFF;"&gt; distrito &lt;/th&gt;
+   &lt;th style="text-align:left;position: sticky; top:0; background-color: #FFFFFF;"&gt; sexo &lt;/th&gt;
+   &lt;th style="text-align:right;position: sticky; top:0; background-color: #FFFFFF;"&gt; edad &lt;/th&gt;
+  &lt;/tr&gt;
+ &lt;/thead&gt;
+&lt;tbody&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; D &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; AMAZONAS &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; BAGUA &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; BAGUA &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; F &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 13 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; D &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; AMAZONAS &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; UTCUBAMBA &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; EL MILAGRO &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; F &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 51 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; C &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; HUANUCO &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; LEONCIO PRADO &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; RUPA-RUPA &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; F &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 36 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; D &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; ICA &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; PISCO &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; SAN ANDRES &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; M &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 26 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; C &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; JUNIN &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; SATIPO &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; MAZAMARI &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; M &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 27 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; C &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; JUNIN &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; SATIPO &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; PANGOA &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; M &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 21 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; C &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; LAMBAYEQUE &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; LAMBAYEQUE &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; MOTUPE &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; F &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 42 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; D &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; MADRE DE DIOS &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; TAMBOPATA &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; LABERINTO &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; F &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 20 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; P &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; MADRE DE DIOS &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; TAMBOPATA &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; LAS PIEDRAS &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; F &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 24 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; D &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; MADRE DE DIOS &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; TAMBOPATA &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; LAS PIEDRAS &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; M &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 21 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; D &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; MADRE DE DIOS &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; TAMBOPATA &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; LAS PIEDRAS &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; F &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 33 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; C &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; MADRE DE DIOS &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; TAMBOPATA &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; TAMBOPATA &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; M &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 28 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; P &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; PIURA &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; PIURA &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; CASTILLA &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; M &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 33 &lt;/td&gt;
+  &lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;&lt;/div&gt;
+
+]
+
+---
+
+.left-column[
+### ¿Qué hace?
+
+### Sintaxis
+
+### Ejemplo 1
+
+## Ejemplo 2
+
+]
+
+.right-column[
+
+
+```r
+df_meta_4 %&gt;% 
+  arrange(desc(edad)) 
+```
+
+]
+
+.pull-left[
+### df_meta_4
+
+&lt;div style="border: 1px solid #ddd; padding: 0px; overflow-y: scroll; height:300px; overflow-x: scroll; width:400px; "&gt;&lt;table class="table" style="font-size: 14px; margin-left: auto; margin-right: auto;"&gt;
+ &lt;thead&gt;
+  &lt;tr&gt;
+   &lt;th style="text-align:left;position: sticky; top:0; background-color: #FFFFFF;"&gt; tipo_dx &lt;/th&gt;
+   &lt;th style="text-align:left;position: sticky; top:0; background-color: #FFFFFF;"&gt; departamento &lt;/th&gt;
+   &lt;th style="text-align:left;position: sticky; top:0; background-color: #FFFFFF;"&gt; provincia &lt;/th&gt;
+   &lt;th style="text-align:left;position: sticky; top:0; background-color: #FFFFFF;"&gt; distrito &lt;/th&gt;
+   &lt;th style="text-align:left;position: sticky; top:0; background-color: #FFFFFF;"&gt; sexo &lt;/th&gt;
+   &lt;th style="text-align:right;position: sticky; top:0; background-color: #FFFFFF;"&gt; edad &lt;/th&gt;
+  &lt;/tr&gt;
+ &lt;/thead&gt;
+&lt;tbody&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; D &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; MADRE DE DIOS &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; TAMBOPATA &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; LABERINTO &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; F &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 20 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; P &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; MADRE DE DIOS &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; TAMBOPATA &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; LAS PIEDRAS &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; F &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 24 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; D &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; MADRE DE DIOS &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; TAMBOPATA &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; LAS PIEDRAS &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; M &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 21 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; D &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; MADRE DE DIOS &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; TAMBOPATA &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; LAS PIEDRAS &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; F &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 33 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; C &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; HUANUCO &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; LEONCIO PRADO &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; RUPA-RUPA &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; F &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 36 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; C &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; JUNIN &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; SATIPO &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; PANGOA &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; M &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 21 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; C &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; JUNIN &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; SATIPO &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; MAZAMARI &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; M &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 27 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; C &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; MADRE DE DIOS &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; TAMBOPATA &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; TAMBOPATA &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; M &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 28 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; D &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; AMAZONAS &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; UTCUBAMBA &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; EL MILAGRO &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; F &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 51 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; D &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; AMAZONAS &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; BAGUA &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; BAGUA &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; F &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 13 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; P &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; PIURA &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; PIURA &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; CASTILLA &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; M &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 33 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; D &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; ICA &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; PISCO &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; SAN ANDRES &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; M &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 26 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; C &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; LAMBAYEQUE &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; LAMBAYEQUE &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; MOTUPE &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; F &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 42 &lt;/td&gt;
+  &lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;&lt;/div&gt;
+]
+
+.pull-right[
+
+
+]
+
+---
+
+.left-column[
+### ¿Qué hace?
+
+### Sintaxis
+
+### Ejemplo 1
+
+## Ejemplo 2
+
+]
+
+.right-column[
+
+
+```r
+df_meta_4 %&gt;% 
+  arrange(desc(edad))
+```
+
+]
+
+.pull-left[
+### df_meta_4
+
+&lt;div style="border: 1px solid #ddd; padding: 0px; overflow-y: scroll; height:300px; overflow-x: scroll; width:400px; "&gt;&lt;table class="table" style="font-size: 14px; margin-left: auto; margin-right: auto;"&gt;
+ &lt;thead&gt;
+  &lt;tr&gt;
+   &lt;th style="text-align:left;position: sticky; top:0; background-color: #FFFFFF;"&gt; tipo_dx &lt;/th&gt;
+   &lt;th style="text-align:left;position: sticky; top:0; background-color: #FFFFFF;"&gt; departamento &lt;/th&gt;
+   &lt;th style="text-align:left;position: sticky; top:0; background-color: #FFFFFF;"&gt; provincia &lt;/th&gt;
+   &lt;th style="text-align:left;position: sticky; top:0; background-color: #FFFFFF;"&gt; distrito &lt;/th&gt;
+   &lt;th style="text-align:left;position: sticky; top:0; background-color: #FFFFFF;"&gt; sexo &lt;/th&gt;
+   &lt;th style="text-align:right;position: sticky; top:0; background-color: #FFFFFF;"&gt; edad &lt;/th&gt;
+  &lt;/tr&gt;
+ &lt;/thead&gt;
+&lt;tbody&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; D &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; MADRE DE DIOS &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; TAMBOPATA &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; LABERINTO &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; F &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 20 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; P &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; MADRE DE DIOS &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; TAMBOPATA &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; LAS PIEDRAS &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; F &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 24 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; D &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; MADRE DE DIOS &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; TAMBOPATA &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; LAS PIEDRAS &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; M &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 21 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; D &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; MADRE DE DIOS &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; TAMBOPATA &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; LAS PIEDRAS &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; F &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 33 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; C &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; HUANUCO &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; LEONCIO PRADO &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; RUPA-RUPA &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; F &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 36 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; C &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; JUNIN &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; SATIPO &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; PANGOA &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; M &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 21 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; C &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; JUNIN &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; SATIPO &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; MAZAMARI &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; M &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 27 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; C &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; MADRE DE DIOS &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; TAMBOPATA &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; TAMBOPATA &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; M &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 28 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; D &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; AMAZONAS &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; UTCUBAMBA &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; EL MILAGRO &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; F &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 51 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; D &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; AMAZONAS &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; BAGUA &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; BAGUA &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; F &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 13 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; P &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; PIURA &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; PIURA &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; CASTILLA &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; M &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 33 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; D &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; ICA &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; PISCO &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; SAN ANDRES &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; M &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 26 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; C &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; LAMBAYEQUE &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; LAMBAYEQUE &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; MOTUPE &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; F &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 42 &lt;/td&gt;
+  &lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;&lt;/div&gt;
+]
+
+.pull-right[
+
+### `Resultado:`
+
+
+&lt;div style="border: 1px solid #ddd; padding: 0px; overflow-y: scroll; height:300px; overflow-x: scroll; width:400px; "&gt;&lt;table class="table" style="font-size: 14px; margin-left: auto; margin-right: auto;"&gt;
+ &lt;thead&gt;
+  &lt;tr&gt;
+   &lt;th style="text-align:left;position: sticky; top:0; background-color: #FFFFFF;"&gt; tipo_dx &lt;/th&gt;
+   &lt;th style="text-align:left;position: sticky; top:0; background-color: #FFFFFF;"&gt; departamento &lt;/th&gt;
+   &lt;th style="text-align:left;position: sticky; top:0; background-color: #FFFFFF;"&gt; provincia &lt;/th&gt;
+   &lt;th style="text-align:left;position: sticky; top:0; background-color: #FFFFFF;"&gt; distrito &lt;/th&gt;
+   &lt;th style="text-align:left;position: sticky; top:0; background-color: #FFFFFF;"&gt; sexo &lt;/th&gt;
+   &lt;th style="text-align:right;position: sticky; top:0; background-color: #FFFFFF;"&gt; edad &lt;/th&gt;
+  &lt;/tr&gt;
+ &lt;/thead&gt;
+&lt;tbody&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; D &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; AMAZONAS &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; UTCUBAMBA &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; EL MILAGRO &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; F &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 51 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; C &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; LAMBAYEQUE &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; LAMBAYEQUE &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; MOTUPE &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; F &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 42 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; C &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; HUANUCO &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; LEONCIO PRADO &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; RUPA-RUPA &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; F &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 36 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; D &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; MADRE DE DIOS &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; TAMBOPATA &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; LAS PIEDRAS &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; F &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 33 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; P &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; PIURA &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; PIURA &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; CASTILLA &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; M &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 33 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; C &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; MADRE DE DIOS &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; TAMBOPATA &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; TAMBOPATA &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; M &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 28 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; C &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; JUNIN &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; SATIPO &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; MAZAMARI &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; M &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 27 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; D &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; ICA &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; PISCO &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; SAN ANDRES &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; M &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 26 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; P &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; MADRE DE DIOS &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; TAMBOPATA &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; LAS PIEDRAS &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; F &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 24 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; D &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; MADRE DE DIOS &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; TAMBOPATA &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; LAS PIEDRAS &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; M &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 21 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; C &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; JUNIN &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; SATIPO &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; PANGOA &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; M &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 21 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; D &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; MADRE DE DIOS &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; TAMBOPATA &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; LABERINTO &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; F &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 20 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; D &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; AMAZONAS &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; BAGUA &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; BAGUA &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; F &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 13 &lt;/td&gt;
+  &lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;&lt;/div&gt;
+
+]
+
+---
+layout: false
+
+class: inverse, center, middle
+
+# Falta poco ...
+
+&lt;!-- ################## Seccion cumsum ################## --&gt;
+---
+layout: true
+class: left, top
+
+## Función `cumsum()`
+
+---
+
+.left-column[
+
+## ¿Qué hace?
+
+]
+
+.right-column[
+
+## Esta función nos permite calcular la suma de una variable de forma acumulada a lo largo de las filas.
+
+### `Nota: esta función va dentro de la función mutate, ya que creará una nueva variable`
+
+]
+
+---
+
+.left-column[
+
+### ¿Qué hace?
+
+## Sintaxis
+
+]
+
+.right-column[
+
+##**DataFrame %&gt;%**
+##**&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;mutate(cumsum(variable))**
+
+]
+
+---
+
+.left-column[
+### ¿Qué hace?
+
+### Sintaxis
+
+## Ejemplo 1
+]
+
+.right-column[
+
+
+```r
+df_meta_4
+```
+
+]
+
+.pull-left[
+### df_meta_4
+
+&lt;div style="border: 1px solid #ddd; padding: 0px; overflow-y: scroll; height:300px; overflow-x: scroll; width:400px; "&gt;&lt;table class="table" style="font-size: 14px; margin-left: auto; margin-right: auto;"&gt;
+ &lt;thead&gt;
+  &lt;tr&gt;
+   &lt;th style="text-align:left;position: sticky; top:0; background-color: #FFFFFF;"&gt; tipo_dx &lt;/th&gt;
+   &lt;th style="text-align:left;position: sticky; top:0; background-color: #FFFFFF;"&gt; departamento &lt;/th&gt;
+   &lt;th style="text-align:left;position: sticky; top:0; background-color: #FFFFFF;"&gt; provincia &lt;/th&gt;
+   &lt;th style="text-align:left;position: sticky; top:0; background-color: #FFFFFF;"&gt; distrito &lt;/th&gt;
+   &lt;th style="text-align:left;position: sticky; top:0; background-color: #FFFFFF;"&gt; sexo &lt;/th&gt;
+   &lt;th style="text-align:right;position: sticky; top:0; background-color: #FFFFFF;"&gt; edad &lt;/th&gt;
+  &lt;/tr&gt;
+ &lt;/thead&gt;
+&lt;tbody&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; D &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; MADRE DE DIOS &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; TAMBOPATA &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; LABERINTO &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; F &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 20 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; P &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; MADRE DE DIOS &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; TAMBOPATA &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; LAS PIEDRAS &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; F &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 24 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; D &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; MADRE DE DIOS &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; TAMBOPATA &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; LAS PIEDRAS &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; M &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 21 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; D &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; MADRE DE DIOS &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; TAMBOPATA &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; LAS PIEDRAS &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; F &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 33 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; C &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; HUANUCO &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; LEONCIO PRADO &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; RUPA-RUPA &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; F &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 36 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; C &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; JUNIN &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; SATIPO &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; PANGOA &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; M &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 21 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; C &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; JUNIN &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; SATIPO &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; MAZAMARI &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; M &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 27 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; C &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; MADRE DE DIOS &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; TAMBOPATA &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; TAMBOPATA &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; M &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 28 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; D &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; AMAZONAS &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; UTCUBAMBA &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; EL MILAGRO &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; F &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 51 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; D &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; AMAZONAS &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; BAGUA &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; BAGUA &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; F &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 13 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; P &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; PIURA &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; PIURA &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; CASTILLA &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; M &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 33 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; D &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; ICA &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; PISCO &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; SAN ANDRES &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; M &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 26 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; C &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; LAMBAYEQUE &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; LAMBAYEQUE &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; MOTUPE &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; F &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 42 &lt;/td&gt;
+  &lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;&lt;/div&gt;
+]
+
+.pull-right[
+
+]
+
+---
+
+.left-column[
+### ¿Qué hace?
+
+### Sintaxis
+
+## Ejemplo 1
+]
+
+.right-column[
+
+
+```r
+df_meta_4 %&gt;% 
+  count(departamento) %&gt;% 
+  mutate(cumsum(n))
+```
+
+]
+
+.pull-left[
+### df_meta_4
+
+&lt;div style="border: 1px solid #ddd; padding: 0px; overflow-y: scroll; height:300px; overflow-x: scroll; width:400px; "&gt;&lt;table class="table" style="font-size: 14px; margin-left: auto; margin-right: auto;"&gt;
+ &lt;thead&gt;
+  &lt;tr&gt;
+   &lt;th style="text-align:left;position: sticky; top:0; background-color: #FFFFFF;"&gt; tipo_dx &lt;/th&gt;
+   &lt;th style="text-align:left;position: sticky; top:0; background-color: #FFFFFF;"&gt; departamento &lt;/th&gt;
+   &lt;th style="text-align:left;position: sticky; top:0; background-color: #FFFFFF;"&gt; provincia &lt;/th&gt;
+   &lt;th style="text-align:left;position: sticky; top:0; background-color: #FFFFFF;"&gt; distrito &lt;/th&gt;
+   &lt;th style="text-align:left;position: sticky; top:0; background-color: #FFFFFF;"&gt; sexo &lt;/th&gt;
+   &lt;th style="text-align:right;position: sticky; top:0; background-color: #FFFFFF;"&gt; edad &lt;/th&gt;
+  &lt;/tr&gt;
+ &lt;/thead&gt;
+&lt;tbody&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; D &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; MADRE DE DIOS &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; TAMBOPATA &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; LABERINTO &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; F &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 20 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; P &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; MADRE DE DIOS &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; TAMBOPATA &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; LAS PIEDRAS &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; F &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 24 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; D &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; MADRE DE DIOS &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; TAMBOPATA &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; LAS PIEDRAS &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; M &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 21 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; D &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; MADRE DE DIOS &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; TAMBOPATA &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; LAS PIEDRAS &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; F &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 33 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; C &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; HUANUCO &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; LEONCIO PRADO &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; RUPA-RUPA &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; F &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 36 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; C &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; JUNIN &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; SATIPO &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; PANGOA &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; M &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 21 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; C &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; JUNIN &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; SATIPO &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; MAZAMARI &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; M &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 27 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; C &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; MADRE DE DIOS &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; TAMBOPATA &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; TAMBOPATA &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; M &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 28 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; D &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; AMAZONAS &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; UTCUBAMBA &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; EL MILAGRO &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; F &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 51 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; D &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; AMAZONAS &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; BAGUA &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; BAGUA &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; F &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 13 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; P &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; PIURA &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; PIURA &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; CASTILLA &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; M &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 33 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; D &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; ICA &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; PISCO &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; SAN ANDRES &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; M &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 26 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; C &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; LAMBAYEQUE &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; LAMBAYEQUE &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; MOTUPE &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; F &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 42 &lt;/td&gt;
+  &lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;&lt;/div&gt;
+]
+
+.pull-right[
+
+### `Resultado:` 
+
+
+]
+
+---
+
+.left-column[
+### ¿Qué hace?
+
+### Sintaxis
+## Ejemplo 1
+]
+
+.right-column[
+
+
+```r
+df_meta_4 %&gt;% 
+  count(departamento) %&gt;% 
+  mutate(cumsum(n))
+```
+
+]
+
+.pull-left[
+### df_meta_4
+
+&lt;div style="border: 1px solid #ddd; padding: 0px; overflow-y: scroll; height:300px; overflow-x: scroll; width:400px; "&gt;&lt;table class="table" style="font-size: 14px; margin-left: auto; margin-right: auto;"&gt;
+ &lt;thead&gt;
+  &lt;tr&gt;
+   &lt;th style="text-align:left;position: sticky; top:0; background-color: #FFFFFF;"&gt; tipo_dx &lt;/th&gt;
+   &lt;th style="text-align:left;position: sticky; top:0; background-color: #FFFFFF;"&gt; departamento &lt;/th&gt;
+   &lt;th style="text-align:left;position: sticky; top:0; background-color: #FFFFFF;"&gt; provincia &lt;/th&gt;
+   &lt;th style="text-align:left;position: sticky; top:0; background-color: #FFFFFF;"&gt; distrito &lt;/th&gt;
+   &lt;th style="text-align:left;position: sticky; top:0; background-color: #FFFFFF;"&gt; sexo &lt;/th&gt;
+   &lt;th style="text-align:right;position: sticky; top:0; background-color: #FFFFFF;"&gt; edad &lt;/th&gt;
+  &lt;/tr&gt;
+ &lt;/thead&gt;
+&lt;tbody&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; D &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; MADRE DE DIOS &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; TAMBOPATA &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; LABERINTO &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; F &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 20 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; P &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; MADRE DE DIOS &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; TAMBOPATA &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; LAS PIEDRAS &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; F &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 24 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; D &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; MADRE DE DIOS &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; TAMBOPATA &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; LAS PIEDRAS &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; M &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 21 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; D &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; MADRE DE DIOS &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; TAMBOPATA &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; LAS PIEDRAS &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; F &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 33 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; C &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; HUANUCO &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; LEONCIO PRADO &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; RUPA-RUPA &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; F &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 36 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; C &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; JUNIN &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; SATIPO &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; PANGOA &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; M &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 21 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; C &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; JUNIN &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; SATIPO &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; MAZAMARI &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; M &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 27 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; C &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; MADRE DE DIOS &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; TAMBOPATA &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; TAMBOPATA &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; M &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 28 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; D &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; AMAZONAS &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; UTCUBAMBA &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; EL MILAGRO &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; F &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 51 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; D &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; AMAZONAS &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; BAGUA &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; BAGUA &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; F &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 13 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; P &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; PIURA &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; PIURA &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; CASTILLA &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; M &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 33 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; D &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; ICA &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; PISCO &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; SAN ANDRES &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; M &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 26 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; C &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; LAMBAYEQUE &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; LAMBAYEQUE &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; MOTUPE &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; F &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 42 &lt;/td&gt;
+  &lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;&lt;/div&gt;
+]
+
+.pull-right[
+
+### `Resultado:` 
+
+&lt;div style="border: 1px solid #ddd; padding: 0px; overflow-y: scroll; height:300px; overflow-x: scroll; width:400px; "&gt;&lt;table class="table" style="font-size: 14px; margin-left: auto; margin-right: auto;"&gt;
+ &lt;thead&gt;
+  &lt;tr&gt;
+   &lt;th style="text-align:left;position: sticky; top:0; background-color: #FFFFFF;"&gt; departamento &lt;/th&gt;
+   &lt;th style="text-align:right;position: sticky; top:0; background-color: #FFFFFF;"&gt; n &lt;/th&gt;
+   &lt;th style="text-align:right;position: sticky; top:0; background-color: #FFFFFF;"&gt; cumsum(n) &lt;/th&gt;
+  &lt;/tr&gt;
+ &lt;/thead&gt;
+&lt;tbody&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; AMAZONAS &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 2 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 2 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; HUANUCO &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 1 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 3 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; ICA &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 1 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 4 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; JUNIN &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 2 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 6 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; LAMBAYEQUE &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 1 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 7 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; MADRE DE DIOS &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 5 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 12 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; PIURA &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 1 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 13 &lt;/td&gt;
+  &lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;&lt;/div&gt;
+
+]
+
+---
+
+.left-column[
+### ¿Qué hace?
+
+### Sintaxis
+
+### Ejemplo 1
+
+## Ejemplo 2
+
+]
+
+.right-column[
+
+
+```r
+df_meta_4 %&gt;% 
+  count(departamento) %&gt;% 
+  mutate(suma = cumsum(n))
+```
+
+]
+
+.pull-left[
+### df_meta_4
+
+&lt;div style="border: 1px solid #ddd; padding: 0px; overflow-y: scroll; height:300px; overflow-x: scroll; width:400px; "&gt;&lt;table class="table" style="font-size: 14px; margin-left: auto; margin-right: auto;"&gt;
+ &lt;thead&gt;
+  &lt;tr&gt;
+   &lt;th style="text-align:left;position: sticky; top:0; background-color: #FFFFFF;"&gt; tipo_dx &lt;/th&gt;
+   &lt;th style="text-align:left;position: sticky; top:0; background-color: #FFFFFF;"&gt; departamento &lt;/th&gt;
+   &lt;th style="text-align:left;position: sticky; top:0; background-color: #FFFFFF;"&gt; provincia &lt;/th&gt;
+   &lt;th style="text-align:left;position: sticky; top:0; background-color: #FFFFFF;"&gt; distrito &lt;/th&gt;
+   &lt;th style="text-align:left;position: sticky; top:0; background-color: #FFFFFF;"&gt; sexo &lt;/th&gt;
+   &lt;th style="text-align:right;position: sticky; top:0; background-color: #FFFFFF;"&gt; edad &lt;/th&gt;
+  &lt;/tr&gt;
+ &lt;/thead&gt;
+&lt;tbody&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; D &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; MADRE DE DIOS &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; TAMBOPATA &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; LABERINTO &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; F &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 20 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; P &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; MADRE DE DIOS &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; TAMBOPATA &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; LAS PIEDRAS &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; F &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 24 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; D &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; MADRE DE DIOS &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; TAMBOPATA &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; LAS PIEDRAS &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; M &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 21 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; D &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; MADRE DE DIOS &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; TAMBOPATA &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; LAS PIEDRAS &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; F &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 33 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; C &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; HUANUCO &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; LEONCIO PRADO &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; RUPA-RUPA &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; F &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 36 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; C &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; JUNIN &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; SATIPO &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; PANGOA &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; M &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 21 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; C &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; JUNIN &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; SATIPO &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; MAZAMARI &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; M &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 27 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; C &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; MADRE DE DIOS &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; TAMBOPATA &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; TAMBOPATA &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; M &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 28 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; D &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; AMAZONAS &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; UTCUBAMBA &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; EL MILAGRO &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; F &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 51 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; D &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; AMAZONAS &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; BAGUA &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; BAGUA &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; F &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 13 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; P &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; PIURA &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; PIURA &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; CASTILLA &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; M &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 33 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; D &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; ICA &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; PISCO &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; SAN ANDRES &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; M &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 26 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; C &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; LAMBAYEQUE &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; LAMBAYEQUE &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; MOTUPE &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; F &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 42 &lt;/td&gt;
+  &lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;&lt;/div&gt;
+]
+
+.pull-right[
+
+
+]
+
+---
+
+.left-column[
+### ¿Qué hace?
+
+### Sintaxis
+
+### Ejemplo 1
+
+## Ejemplo 2
+
+]
+
+.right-column[
+
+
+```r
+df_meta_4 %&gt;% 
+  count(departamento) %&gt;% 
+  mutate(suma = cumsum(n))
+```
+
+]
+
+.pull-left[
+### df_meta_4
+
+&lt;div style="border: 1px solid #ddd; padding: 0px; overflow-y: scroll; height:300px; overflow-x: scroll; width:400px; "&gt;&lt;table class="table" style="font-size: 14px; margin-left: auto; margin-right: auto;"&gt;
+ &lt;thead&gt;
+  &lt;tr&gt;
+   &lt;th style="text-align:left;position: sticky; top:0; background-color: #FFFFFF;"&gt; tipo_dx &lt;/th&gt;
+   &lt;th style="text-align:left;position: sticky; top:0; background-color: #FFFFFF;"&gt; departamento &lt;/th&gt;
+   &lt;th style="text-align:left;position: sticky; top:0; background-color: #FFFFFF;"&gt; provincia &lt;/th&gt;
+   &lt;th style="text-align:left;position: sticky; top:0; background-color: #FFFFFF;"&gt; distrito &lt;/th&gt;
+   &lt;th style="text-align:left;position: sticky; top:0; background-color: #FFFFFF;"&gt; sexo &lt;/th&gt;
+   &lt;th style="text-align:right;position: sticky; top:0; background-color: #FFFFFF;"&gt; edad &lt;/th&gt;
+  &lt;/tr&gt;
+ &lt;/thead&gt;
+&lt;tbody&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; D &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; MADRE DE DIOS &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; TAMBOPATA &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; LABERINTO &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; F &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 20 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; P &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; MADRE DE DIOS &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; TAMBOPATA &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; LAS PIEDRAS &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; F &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 24 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; D &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; MADRE DE DIOS &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; TAMBOPATA &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; LAS PIEDRAS &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; M &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 21 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; D &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; MADRE DE DIOS &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; TAMBOPATA &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; LAS PIEDRAS &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; F &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 33 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; C &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; HUANUCO &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; LEONCIO PRADO &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; RUPA-RUPA &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; F &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 36 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; C &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; JUNIN &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; SATIPO &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; PANGOA &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; M &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 21 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; C &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; JUNIN &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; SATIPO &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; MAZAMARI &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; M &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 27 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; C &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; MADRE DE DIOS &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; TAMBOPATA &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; TAMBOPATA &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; M &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 28 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; D &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; AMAZONAS &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; UTCUBAMBA &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; EL MILAGRO &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; F &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 51 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; D &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; AMAZONAS &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; BAGUA &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; BAGUA &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; F &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 13 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; P &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; PIURA &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; PIURA &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; CASTILLA &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; M &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 33 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; D &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; ICA &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; PISCO &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; SAN ANDRES &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; M &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 26 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; C &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; LAMBAYEQUE &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; LAMBAYEQUE &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; MOTUPE &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; F &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 42 &lt;/td&gt;
+  &lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;&lt;/div&gt;
+]
+
+.pull-right[
+
+### `Resultado:`
+
+
+&lt;div style="border: 1px solid #ddd; padding: 0px; overflow-y: scroll; height:300px; overflow-x: scroll; width:400px; "&gt;&lt;table class="table" style="font-size: 14px; margin-left: auto; margin-right: auto;"&gt;
+ &lt;thead&gt;
+  &lt;tr&gt;
+   &lt;th style="text-align:left;position: sticky; top:0; background-color: #FFFFFF;"&gt; departamento &lt;/th&gt;
+   &lt;th style="text-align:right;position: sticky; top:0; background-color: #FFFFFF;"&gt; n &lt;/th&gt;
+   &lt;th style="text-align:right;position: sticky; top:0; background-color: #FFFFFF;"&gt; suma &lt;/th&gt;
+  &lt;/tr&gt;
+ &lt;/thead&gt;
+&lt;tbody&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; AMAZONAS &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 2 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 2 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; HUANUCO &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 1 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 3 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; ICA &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 1 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 4 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; JUNIN &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 2 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 6 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; LAMBAYEQUE &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 1 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 7 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; MADRE DE DIOS &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 5 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 12 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; PIURA &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 1 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 13 &lt;/td&gt;
+  &lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;&lt;/div&gt;
+
+]
+
+---
+
+layout: false
+
+class: inverse, center, middle
+
+# Finalmente ...
+
+&lt;!-- ################## Seccion print ################## --&gt;
+---
+layout: true
+class: left, top
+
+## Función `print()`
+
+---
+
+.left-column[
+
+## ¿Qué hace?
+
+]
+
+.right-column[
+
+## Esta función nos muestra el resultado en la consola (aún si previamente definimos que el resultado se guarde en un objeto)
+
+
+]
+
+---
+
+.left-column[
+
+### ¿Qué hace?
+
+## Sintaxis
+
+]
+
+.right-column[
+
+##**DataFrame %&gt;%**
+##**&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;print()**
+
+]
+
+---
+
+.left-column[
+### ¿Qué hace?
+
+### Sintaxis
+
+## Ejemplo 1
+]
+
+.right-column[
+
+
+```r
+df_meta_4
+```
+
+]
+
+.pull-left[
+### df_meta_4
+
+&lt;div style="border: 1px solid #ddd; padding: 0px; overflow-y: scroll; height:300px; overflow-x: scroll; width:400px; "&gt;&lt;table class="table" style="font-size: 14px; margin-left: auto; margin-right: auto;"&gt;
+ &lt;thead&gt;
+  &lt;tr&gt;
+   &lt;th style="text-align:left;position: sticky; top:0; background-color: #FFFFFF;"&gt; tipo_dx &lt;/th&gt;
+   &lt;th style="text-align:left;position: sticky; top:0; background-color: #FFFFFF;"&gt; departamento &lt;/th&gt;
+   &lt;th style="text-align:left;position: sticky; top:0; background-color: #FFFFFF;"&gt; provincia &lt;/th&gt;
+   &lt;th style="text-align:left;position: sticky; top:0; background-color: #FFFFFF;"&gt; distrito &lt;/th&gt;
+   &lt;th style="text-align:left;position: sticky; top:0; background-color: #FFFFFF;"&gt; sexo &lt;/th&gt;
+   &lt;th style="text-align:right;position: sticky; top:0; background-color: #FFFFFF;"&gt; edad &lt;/th&gt;
+  &lt;/tr&gt;
+ &lt;/thead&gt;
+&lt;tbody&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; D &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; MADRE DE DIOS &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; TAMBOPATA &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; LABERINTO &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; F &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 20 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; P &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; MADRE DE DIOS &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; TAMBOPATA &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; LAS PIEDRAS &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; F &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 24 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; D &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; MADRE DE DIOS &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; TAMBOPATA &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; LAS PIEDRAS &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; M &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 21 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; D &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; MADRE DE DIOS &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; TAMBOPATA &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; LAS PIEDRAS &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; F &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 33 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; C &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; HUANUCO &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; LEONCIO PRADO &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; RUPA-RUPA &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; F &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 36 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; C &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; JUNIN &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; SATIPO &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; PANGOA &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; M &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 21 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; C &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; JUNIN &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; SATIPO &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; MAZAMARI &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; M &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 27 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; C &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; MADRE DE DIOS &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; TAMBOPATA &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; TAMBOPATA &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; M &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 28 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; D &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; AMAZONAS &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; UTCUBAMBA &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; EL MILAGRO &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; F &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 51 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; D &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; AMAZONAS &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; BAGUA &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; BAGUA &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; F &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 13 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; P &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; PIURA &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; PIURA &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; CASTILLA &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; M &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 33 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; D &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; ICA &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; PISCO &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; SAN ANDRES &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; M &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 26 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; C &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; LAMBAYEQUE &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; LAMBAYEQUE &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; MOTUPE &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; F &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 42 &lt;/td&gt;
+  &lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;&lt;/div&gt;
+]
+
+.pull-right[
+
+]
+
+---
+
+.left-column[
+### ¿Qué hace?
+
+### Sintaxis
+
+## Ejemplo 1
+]
+
+.right-column[
+
+
+```r
+df_meta_4 %&gt;% 
+ print()
+```
+
+]
+
+.pull-left[
+### df_meta_4
+
+&lt;div style="border: 1px solid #ddd; padding: 0px; overflow-y: scroll; height:300px; overflow-x: scroll; width:400px; "&gt;&lt;table class="table" style="font-size: 14px; margin-left: auto; margin-right: auto;"&gt;
+ &lt;thead&gt;
+  &lt;tr&gt;
+   &lt;th style="text-align:left;position: sticky; top:0; background-color: #FFFFFF;"&gt; tipo_dx &lt;/th&gt;
+   &lt;th style="text-align:left;position: sticky; top:0; background-color: #FFFFFF;"&gt; departamento &lt;/th&gt;
+   &lt;th style="text-align:left;position: sticky; top:0; background-color: #FFFFFF;"&gt; provincia &lt;/th&gt;
+   &lt;th style="text-align:left;position: sticky; top:0; background-color: #FFFFFF;"&gt; distrito &lt;/th&gt;
+   &lt;th style="text-align:left;position: sticky; top:0; background-color: #FFFFFF;"&gt; sexo &lt;/th&gt;
+   &lt;th style="text-align:right;position: sticky; top:0; background-color: #FFFFFF;"&gt; edad &lt;/th&gt;
+  &lt;/tr&gt;
+ &lt;/thead&gt;
+&lt;tbody&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; D &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; MADRE DE DIOS &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; TAMBOPATA &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; LABERINTO &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; F &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 20 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; P &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; MADRE DE DIOS &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; TAMBOPATA &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; LAS PIEDRAS &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; F &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 24 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; D &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; MADRE DE DIOS &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; TAMBOPATA &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; LAS PIEDRAS &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; M &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 21 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; D &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; MADRE DE DIOS &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; TAMBOPATA &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; LAS PIEDRAS &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; F &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 33 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; C &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; HUANUCO &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; LEONCIO PRADO &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; RUPA-RUPA &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; F &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 36 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; C &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; JUNIN &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; SATIPO &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; PANGOA &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; M &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 21 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; C &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; JUNIN &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; SATIPO &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; MAZAMARI &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; M &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 27 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; C &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; MADRE DE DIOS &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; TAMBOPATA &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; TAMBOPATA &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; M &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 28 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; D &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; AMAZONAS &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; UTCUBAMBA &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; EL MILAGRO &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; F &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 51 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; D &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; AMAZONAS &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; BAGUA &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; BAGUA &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; F &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 13 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; P &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; PIURA &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; PIURA &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; CASTILLA &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; M &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 33 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; D &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; ICA &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; PISCO &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; SAN ANDRES &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; M &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 26 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; C &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; LAMBAYEQUE &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; LAMBAYEQUE &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; MOTUPE &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; F &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 42 &lt;/td&gt;
+  &lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;&lt;/div&gt;
+]
+
+.pull-right[
+
+### `Resultado:` 
+
+
+]
+
+---
+
+.left-column[
+### ¿Qué hace?
+
+### Sintaxis
+## Ejemplo 1
+]
+
+.right-column[
+
+
+```r
+df_meta_4 %&gt;% 
+ print()
+```
+
+]
+
+.pull-left[
+### df_meta_4
+
+&lt;div style="border: 1px solid #ddd; padding: 0px; overflow-y: scroll; height:300px; overflow-x: scroll; width:400px; "&gt;&lt;table class="table" style="font-size: 14px; margin-left: auto; margin-right: auto;"&gt;
+ &lt;thead&gt;
+  &lt;tr&gt;
+   &lt;th style="text-align:left;position: sticky; top:0; background-color: #FFFFFF;"&gt; tipo_dx &lt;/th&gt;
+   &lt;th style="text-align:left;position: sticky; top:0; background-color: #FFFFFF;"&gt; departamento &lt;/th&gt;
+   &lt;th style="text-align:left;position: sticky; top:0; background-color: #FFFFFF;"&gt; provincia &lt;/th&gt;
+   &lt;th style="text-align:left;position: sticky; top:0; background-color: #FFFFFF;"&gt; distrito &lt;/th&gt;
+   &lt;th style="text-align:left;position: sticky; top:0; background-color: #FFFFFF;"&gt; sexo &lt;/th&gt;
+   &lt;th style="text-align:right;position: sticky; top:0; background-color: #FFFFFF;"&gt; edad &lt;/th&gt;
+  &lt;/tr&gt;
+ &lt;/thead&gt;
+&lt;tbody&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; D &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; MADRE DE DIOS &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; TAMBOPATA &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; LABERINTO &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; F &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 20 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; P &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; MADRE DE DIOS &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; TAMBOPATA &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; LAS PIEDRAS &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; F &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 24 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; D &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; MADRE DE DIOS &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; TAMBOPATA &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; LAS PIEDRAS &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; M &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 21 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; D &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; MADRE DE DIOS &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; TAMBOPATA &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; LAS PIEDRAS &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; F &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 33 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; C &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; HUANUCO &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; LEONCIO PRADO &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; RUPA-RUPA &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; F &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 36 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; C &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; JUNIN &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; SATIPO &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; PANGOA &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; M &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 21 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; C &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; JUNIN &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; SATIPO &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; MAZAMARI &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; M &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 27 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; C &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; MADRE DE DIOS &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; TAMBOPATA &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; TAMBOPATA &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; M &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 28 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; D &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; AMAZONAS &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; UTCUBAMBA &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; EL MILAGRO &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; F &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 51 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; D &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; AMAZONAS &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; BAGUA &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; BAGUA &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; F &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 13 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; P &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; PIURA &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; PIURA &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; CASTILLA &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; M &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 33 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; D &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; ICA &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; PISCO &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; SAN ANDRES &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; M &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 26 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; C &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; LAMBAYEQUE &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; LAMBAYEQUE &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; MOTUPE &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; F &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 42 &lt;/td&gt;
+  &lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;&lt;/div&gt;
+]
+
+.pull-right[
+
+### `Resultado:` 
+
+
+```
+##    tipo_dx  departamento     provincia    distrito sexo edad
+## 1        D MADRE DE DIOS     TAMBOPATA   LABERINTO    F   20
+## 2        P MADRE DE DIOS     TAMBOPATA LAS PIEDRAS    F   24
+## 3        D MADRE DE DIOS     TAMBOPATA LAS PIEDRAS    M   21
+## 4        D MADRE DE DIOS     TAMBOPATA LAS PIEDRAS    F   33
+## 5        C       HUANUCO LEONCIO PRADO   RUPA-RUPA    F   36
+## 6        C         JUNIN        SATIPO      PANGOA    M   21
+## 7        C         JUNIN        SATIPO    MAZAMARI    M   27
+## 8        C MADRE DE DIOS     TAMBOPATA   TAMBOPATA    M   28
+## 9        D      AMAZONAS     UTCUBAMBA  EL MILAGRO    F   51
+## 10       D      AMAZONAS         BAGUA       BAGUA    F   13
+## 11       P         PIURA         PIURA    CASTILLA    M   33
+## 12       D           ICA         PISCO  SAN ANDRES    M   26
+## 13       C    LAMBAYEQUE    LAMBAYEQUE      MOTUPE    F   42
+```
+
+]
+
+---
+
+.left-column[
+### ¿Qué hace?
+
+### Sintaxis
+
+### Ejemplo 1
+
+## Ejemplo 2
+
+]
+
+.right-column[
+
+
+```r
+df_meta_4 %&gt;% 
+  count(departamento) %&gt;% 
+  mutate(suma = cumsum(n))
+```
+
+]
+
+.pull-left[
+### df_meta_4
+
+&lt;div style="border: 1px solid #ddd; padding: 0px; overflow-y: scroll; height:300px; overflow-x: scroll; width:400px; "&gt;&lt;table class="table" style="font-size: 14px; margin-left: auto; margin-right: auto;"&gt;
+ &lt;thead&gt;
+  &lt;tr&gt;
+   &lt;th style="text-align:left;position: sticky; top:0; background-color: #FFFFFF;"&gt; tipo_dx &lt;/th&gt;
+   &lt;th style="text-align:left;position: sticky; top:0; background-color: #FFFFFF;"&gt; departamento &lt;/th&gt;
+   &lt;th style="text-align:left;position: sticky; top:0; background-color: #FFFFFF;"&gt; provincia &lt;/th&gt;
+   &lt;th style="text-align:left;position: sticky; top:0; background-color: #FFFFFF;"&gt; distrito &lt;/th&gt;
+   &lt;th style="text-align:left;position: sticky; top:0; background-color: #FFFFFF;"&gt; sexo &lt;/th&gt;
+   &lt;th style="text-align:right;position: sticky; top:0; background-color: #FFFFFF;"&gt; edad &lt;/th&gt;
+  &lt;/tr&gt;
+ &lt;/thead&gt;
+&lt;tbody&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; D &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; MADRE DE DIOS &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; TAMBOPATA &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; LABERINTO &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; F &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 20 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; P &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; MADRE DE DIOS &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; TAMBOPATA &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; LAS PIEDRAS &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; F &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 24 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; D &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; MADRE DE DIOS &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; TAMBOPATA &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; LAS PIEDRAS &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; M &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 21 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; D &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; MADRE DE DIOS &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; TAMBOPATA &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; LAS PIEDRAS &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; F &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 33 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; C &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; HUANUCO &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; LEONCIO PRADO &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; RUPA-RUPA &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; F &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 36 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; C &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; JUNIN &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; SATIPO &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; PANGOA &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; M &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 21 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; C &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; JUNIN &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; SATIPO &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; MAZAMARI &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; M &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 27 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; C &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; MADRE DE DIOS &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; TAMBOPATA &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; TAMBOPATA &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; M &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 28 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; D &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; AMAZONAS &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; UTCUBAMBA &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; EL MILAGRO &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; F &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 51 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; D &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; AMAZONAS &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; BAGUA &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; BAGUA &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; F &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 13 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; P &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; PIURA &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; PIURA &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; CASTILLA &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; M &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 33 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; D &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; ICA &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; PISCO &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; SAN ANDRES &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; M &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 26 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; C &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; LAMBAYEQUE &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; LAMBAYEQUE &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; MOTUPE &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; F &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 42 &lt;/td&gt;
+  &lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;&lt;/div&gt;
+]
+
+.pull-right[
+
+
+]
+
+---
+
+.left-column[
+### ¿Qué hace?
+
+### Sintaxis
+
+### Ejemplo 1
+
+## Ejemplo 2
+
+]
+
+.right-column[
+
+
+```r
+df_meta_4 %&gt;% 
+  count(departamento) %&gt;% 
+  mutate(suma = cumsum(n))
+```
+
+]
+
+.pull-left[
+### df_meta_4
+
+&lt;div style="border: 1px solid #ddd; padding: 0px; overflow-y: scroll; height:300px; overflow-x: scroll; width:400px; "&gt;&lt;table class="table" style="font-size: 14px; margin-left: auto; margin-right: auto;"&gt;
+ &lt;thead&gt;
+  &lt;tr&gt;
+   &lt;th style="text-align:left;position: sticky; top:0; background-color: #FFFFFF;"&gt; tipo_dx &lt;/th&gt;
+   &lt;th style="text-align:left;position: sticky; top:0; background-color: #FFFFFF;"&gt; departamento &lt;/th&gt;
+   &lt;th style="text-align:left;position: sticky; top:0; background-color: #FFFFFF;"&gt; provincia &lt;/th&gt;
+   &lt;th style="text-align:left;position: sticky; top:0; background-color: #FFFFFF;"&gt; distrito &lt;/th&gt;
+   &lt;th style="text-align:left;position: sticky; top:0; background-color: #FFFFFF;"&gt; sexo &lt;/th&gt;
+   &lt;th style="text-align:right;position: sticky; top:0; background-color: #FFFFFF;"&gt; edad &lt;/th&gt;
+  &lt;/tr&gt;
+ &lt;/thead&gt;
+&lt;tbody&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; D &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; MADRE DE DIOS &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; TAMBOPATA &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; LABERINTO &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; F &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 20 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; P &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; MADRE DE DIOS &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; TAMBOPATA &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; LAS PIEDRAS &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; F &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 24 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; D &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; MADRE DE DIOS &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; TAMBOPATA &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; LAS PIEDRAS &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; M &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 21 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; D &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; MADRE DE DIOS &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; TAMBOPATA &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; LAS PIEDRAS &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; F &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 33 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; C &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; HUANUCO &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; LEONCIO PRADO &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; RUPA-RUPA &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; F &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 36 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; C &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; JUNIN &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; SATIPO &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; PANGOA &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; M &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 21 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; C &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; JUNIN &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; SATIPO &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; MAZAMARI &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; M &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 27 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; C &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; MADRE DE DIOS &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; TAMBOPATA &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; TAMBOPATA &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; M &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 28 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; D &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; AMAZONAS &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; UTCUBAMBA &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; EL MILAGRO &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; F &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 51 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; D &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; AMAZONAS &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; BAGUA &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; BAGUA &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; F &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 13 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; P &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; PIURA &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; PIURA &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; CASTILLA &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; M &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 33 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; D &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; ICA &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; PISCO &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; SAN ANDRES &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; M &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 26 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; C &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; LAMBAYEQUE &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; LAMBAYEQUE &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; MOTUPE &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; F &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 42 &lt;/td&gt;
+  &lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;&lt;/div&gt;
+]
+
+.pull-right[
+
+### `Resultado:`
+
+
+
+```
+##    departamento n
+## 1      AMAZONAS 2
+## 2       HUANUCO 1
+## 3           ICA 1
+## 4         JUNIN 2
+## 5    LAMBAYEQUE 1
+## 6 MADRE DE DIOS 5
+## 7         PIURA 1
+```
+
+]
+
+---
+
+layout: false
+
+class: highlight, middle, center
+
+# ¡ Gracias por su total atención !
+## Pasemos a los grupos de prácticas
+
+&lt;img src="https://i.giphy.com/tztv4OdtoKfgQ.gif" width="60%" /&gt;
+
+
+    </textarea>
+<style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
+<script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
+<script>var slideshow = remark.create({
+"ratio": "16:9",
+"highlightStyle": "github",
+"highlightLines": true,
+"countIncrementalSlides": false,
+"slideNumberFormat": "<div class=\"progress-bar-container\">\n  <div class=\"progress-bar\" style=\"width: calc(%current% / %total% * 100%);\">\n  </div>\n</div>"
+});
+if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {
+  window.dispatchEvent(new Event('resize'));
+});
+(function(d) {
+  var s = d.createElement("style"), r = d.querySelector(".remark-slide-scaler");
+  if (!r) return;
+  s.type = "text/css"; s.innerHTML = "@page {size: " + r.style.width + " " + r.style.height +"; }";
+  d.head.appendChild(s);
+})(document);
+
+(function(d) {
+  var el = d.getElementsByClassName("remark-slides-area");
+  if (!el) return;
+  var slide, slides = slideshow.getSlides(), els = el[0].children;
+  for (var i = 1; i < slides.length; i++) {
+    slide = slides[i];
+    if (slide.properties.continued === "true" || slide.properties.count === "false") {
+      els[i - 1].className += ' has-continuation';
+    }
+  }
+  var s = d.createElement("style");
+  s.type = "text/css"; s.innerHTML = "@media print { .has-continuation { display: none; } }";
+  d.head.appendChild(s);
+})(document);
+// delete the temporary CSS (for displaying all slides initially) when the user
+// starts to view slides
+(function() {
+  var deleted = false;
+  slideshow.on('beforeShowSlide', function(slide) {
+    if (deleted) return;
+    var sheets = document.styleSheets, node;
+    for (var i = 0; i < sheets.length; i++) {
+      node = sheets[i].ownerNode;
+      if (node.dataset["target"] !== "print-only") continue;
+      node.parentNode.removeChild(node);
+    }
+    deleted = true;
+  });
+})();
+(function() {
+  "use strict"
+  // Replace <script> tags in slides area to make them executable
+  var scripts = document.querySelectorAll(
+    '.remark-slides-area .remark-slide-container script'
+  );
+  if (!scripts.length) return;
+  for (var i = 0; i < scripts.length; i++) {
+    var s = document.createElement('script');
+    var code = document.createTextNode(scripts[i].textContent);
+    s.appendChild(code);
+    var scriptAttrs = scripts[i].attributes;
+    for (var j = 0; j < scriptAttrs.length; j++) {
+      s.setAttribute(scriptAttrs[j].name, scriptAttrs[j].value);
+    }
+    scripts[i].parentElement.replaceChild(s, scripts[i]);
+  }
+})();
+(function() {
+  var links = document.getElementsByTagName('a');
+  for (var i = 0; i < links.length; i++) {
+    if (/^(https?:)?\/\//.test(links[i].getAttribute('href'))) {
+      links[i].target = '_blank';
+    }
+  }
+})();
+// adds .remark-code-has-line-highlighted class to <pre> parent elements
+// of code chunks containing highlighted lines with class .remark-code-line-highlighted
+(function(d) {
+  const hlines = d.querySelectorAll('.remark-code-line-highlighted');
+  const preParents = [];
+  const findPreParent = function(line, p = 0) {
+    if (p > 1) return null; // traverse up no further than grandparent
+    const el = line.parentElement;
+    return el.tagName === "PRE" ? el : findPreParent(el, ++p);
+  };
+
+  for (let line of hlines) {
+    let pre = findPreParent(line);
+    if (pre && !preParents.includes(pre)) preParents.push(pre);
+  }
+  preParents.forEach(p => p.classList.add("remark-code-has-line-highlighted"));
+})(document);</script>
+
+<script>
+slideshow._releaseMath = function(el) {
+  var i, text, code, codes = el.getElementsByTagName('code');
+  for (i = 0; i < codes.length;) {
+    code = codes[i];
+    if (code.parentNode.tagName !== 'PRE' && code.childElementCount === 0) {
+      text = code.textContent;
+      if (/^\\\((.|\s)+\\\)$/.test(text) || /^\\\[(.|\s)+\\\]$/.test(text) ||
+          /^\$\$(.|\s)+\$\$$/.test(text) ||
+          /^\\begin\{([^}]+)\}(.|\s)+\\end\{[^}]+\}$/.test(text)) {
+        code.outerHTML = code.innerHTML;  // remove <code></code>
+        continue;
+      }
+    }
+    i++;
+  }
+};
+slideshow._releaseMath(document);
+</script>
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+(function () {
+  var script = document.createElement('script');
+  script.type = 'text/javascript';
+  script.src  = 'https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML';
+  if (location.protocol !== 'file:' && /^https?:/.test(script.src))
+    script.src  = script.src.replace(/^https?:/, '');
+  document.getElementsByTagName('head')[0].appendChild(script);
+})();
+</script>
+  </body>
+</html>
