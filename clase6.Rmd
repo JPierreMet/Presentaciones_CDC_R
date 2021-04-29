@@ -995,7 +995,7 @@ df_meta_4 %>%
 ```{r, eval=F}
 df_meta_4 %>% 
   count(departamento) %>% 
-  mutate(suma = cumsum(n))
+  print()
 ```
 
 ]
@@ -1034,7 +1034,7 @@ df_meta_4 %>%
 ```{r, eval=F}
 df_meta_4 %>% 
   count(departamento) %>% 
-  mutate(suma = cumsum(n))
+  print()
 ```
 
 ]

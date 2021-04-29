@@ -76,8 +76,8 @@ class: inverse, center, middle
 ---
 class: center, middle
 
-```{r, echo=FALSE, fig.cap="", out.width = '50%'}
-knitr::include_graphics("https://itziartorres.neocities.org/Img/homeranimada.gif")
+```{r, echo=FALSE, fig.cap="", out.width = '60%'}
+knitr::include_graphics("https://thumbs.gfycat.com/GorgeousOrdinaryBooby-max-14mb.gif")
 ```
 
 ---
@@ -979,7 +979,7 @@ df_meta_2 %>%
 
 Operador lógico | Uso | Ejemplo 
 ----------------------------|-------|---------------
-!= |Si x no es igual que y | **`ano:tipo_dx`**
+!= |Si x no es igual que y | **`tipo_dx != 'D'`**
 
 ```{r, eval = F}
 df_meta_2 %>% 
@@ -1104,11 +1104,11 @@ all() | Es verdadero A, B y C | **`all(A, B, C)`**
 .right-column[
 Operador booleano | Uso | Ejemplo 
 ----------------------------|-------|---------------
-& | A y B son verdaderos |  **`edad > 10 & sexo == 'M'`**
+& | A y B son verdaderos |  **`edad > 10 & edad <= 50`**
 
 ```{r, eval = F}
 df_meta_2 %>% 
-    filter( edad > 10 & sexo == 'M' ) 
+    filter( edad > 10 & edad <= 50 ) 
 ```
 
 ]
@@ -1128,7 +1128,7 @@ df_meta_2 %>%
 #### `Resultado:`
 ```{r,echo=FALSE, out.width='30%'}
 df_meta_2 %>% 
-    filter( edad > 10 & sexo == 'M' ) %>% 
+    filter( edad > 10 & edad <= 50 ) %>% 
   kable("html", row.names=FALSE) %>% 
   kable_styling(font_size = 14)  %>%  
   scroll_box(height = "300px", width = "400px")

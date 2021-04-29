@@ -4,7 +4,7 @@
     <title>Manipulación de datos con dplyr</title>
     <meta charset="utf-8" />
     <meta name="author" content="Pierre Velásquez Rodriguez" />
-    <script src="clase4_files/header-attrs-2.6/header-attrs.js"></script>
+    <script src="clase4_files/header-attrs-2.7/header-attrs.js"></script>
     <link href="clase4_files/remark-css-0.0.1/default.css" rel="stylesheet" />
     <script src="clase4_files/kePrint-0.0.1/kePrint.js"></script>
     <link href="clase4_files/lightable-0.0.1/lightable.css" rel="stylesheet" />
@@ -60,7 +60,7 @@ class: inverse, center, middle
 ---
 class: center, middle
 
-&lt;img src="https://itziartorres.neocities.org/Img/homeranimada.gif" width="50%" /&gt;
+&lt;img src="https://thumbs.gfycat.com/GorgeousOrdinaryBooby-max-14mb.gif" width="60%" /&gt;
 
 ---
 background-image: url(https://www.libraries.rutgers.edu/sites/default/files/styles/resize_to_300px_width/public/events/2019/09/dplyr.png?itok=yu7MLqqh)
@@ -2872,7 +2872,7 @@ df_meta_2 %&gt;%
 
 Operador lógico | Uso | Ejemplo 
 ----------------------------|-------|---------------
-!= |Si x no es igual que y | **`ano:tipo_dx`**
+!= |Si x no es igual que y | **`tipo_dx != 'D'`**
 
 
 ```r
@@ -3285,12 +3285,12 @@ all() | Es verdadero A, B y C | **`all(A, B, C)`**
 .right-column[
 Operador booleano | Uso | Ejemplo 
 ----------------------------|-------|---------------
-&amp; | A y B son verdaderos |  **`edad &gt; 10 &amp; sexo == 'M'`**
+&amp; | A y B son verdaderos |  **`edad &gt; 10 &amp; edad &lt;= 50`**
 
 
 ```r
 df_meta_2 %&gt;% 
-    filter( edad &gt; 10 &amp; sexo == 'M' ) 
+    filter( edad &gt; 10 &amp; edad &lt;= 50 ) 
 ```
 
 ]
@@ -3421,24 +3421,24 @@ df_meta_2 %&gt;%
    &lt;td style="text-align:right;"&gt; 19 &lt;/td&gt;
    &lt;td style="text-align:left;"&gt; C &lt;/td&gt;
    &lt;td style="text-align:left;"&gt; 200602 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 47 &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; F &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:right;"&gt; 2015 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 19 &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; C &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; 200602 &lt;/td&gt;
    &lt;td style="text-align:right;"&gt; 48 &lt;/td&gt;
    &lt;td style="text-align:left;"&gt; M &lt;/td&gt;
   &lt;/tr&gt;
   &lt;tr&gt;
    &lt;td style="text-align:right;"&gt; 2015 &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; 11 &lt;/td&gt;
-   &lt;td style="text-align:left;"&gt; D &lt;/td&gt;
-   &lt;td style="text-align:left;"&gt; 170101 &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; 59 &lt;/td&gt;
-   &lt;td style="text-align:left;"&gt; M &lt;/td&gt;
-  &lt;/tr&gt;
-  &lt;tr&gt;
-   &lt;td style="text-align:right;"&gt; 2015 &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; 31 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 34 &lt;/td&gt;
    &lt;td style="text-align:left;"&gt; D &lt;/td&gt;
    &lt;td style="text-align:left;"&gt; 170103 &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; 51 &lt;/td&gt;
-   &lt;td style="text-align:left;"&gt; M &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 19 &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; F &lt;/td&gt;
   &lt;/tr&gt;
   &lt;tr&gt;
    &lt;td style="text-align:right;"&gt; 2018 &lt;/td&gt;
@@ -3455,6 +3455,14 @@ df_meta_2 %&gt;%
    &lt;td style="text-align:left;"&gt; NA &lt;/td&gt;
    &lt;td style="text-align:right;"&gt; 21 &lt;/td&gt;
    &lt;td style="text-align:left;"&gt; M &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:right;"&gt; 2020 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 3 &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; C &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; NA &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 36 &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; F &lt;/td&gt;
   &lt;/tr&gt;
 &lt;/tbody&gt;
 &lt;/table&gt;&lt;/div&gt;
